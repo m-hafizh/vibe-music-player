@@ -1,34 +1,37 @@
-# music
+# Vibe Music Player — v1
 
-## Project setup
-```
+## Simple Description
+v1 is the tutorial-style baseline of the project: a simple web music player focused on single-track playback.
+
+## Tech Stack
+- Vue 2 (legacy baseline)
+- Vue CLI
+- Vuex
+- Vue Router
+- Howler.js (audio playback)
+- Tailwind CSS
+- Appwrite SDK (project wiring)
+
+## UI Design and Styling
+- Clean, straightforward layout for learning flow
+- Static hero + song list sections
+- Tailwind utility classes with minimal custom CSS
+
+## Features
+- Single track playback
+- Play / Pause control
+- Seek/progress bar interaction
+- Basic song listing and song page
+
+## Project Scripts
+```bash
 yarn install
-```
-
-### Compiles and hot-reloads for development
-```
 yarn serve
-```
-
-### Compiles and minifies for production
-```
 yarn build
-```
-
-### Run your unit tests
-```
 yarn test:unit
-```
-
-### Run your end-to-end tests
-```
 yarn test:e2e
-```
-
-### Lints and fixes files
-```
 yarn lint
 ```
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+## Version Note
+This version is intended as the simplest foundation before major stack and feature upgrades.
