@@ -21,10 +21,10 @@
     </section>
     <!-- Form -->
     <section class="container mx-auto mt-6" id="comments">
-      <div class="bg-white rounded border border-gray-200 relative flex flex-col">
-        <div class="px-6 pt-6 pb-5 font-bold border-b border-gray-200">
+      <div class="bg-white dark:bg-gray-800 rounded border border-gray-200 dark:border-gray-700 relative flex flex-col shadow-sm transition-colors duration-300">
+        <div class="px-6 pt-6 pb-5 font-bold border-b border-gray-200 dark:border-gray-700 flex justify-between items-center transition-colors duration-300">
           <!-- Comment Count -->
-          <span class="card-title">
+          <span class="card-title text-xl text-gray-800 dark:text-gray-100 transition-colors">
             {{ $t('song.comment_count', song.comment_count, {
               count: song.comment_count
             }) }}
@@ -39,19 +39,19 @@
           <vee-form :validation-schema="schema" @submit="addComment"
             v-if="userLoggedIn">
             <vee-field as="textarea" name="comment"
-              class="block w-full py-1.5 px-3 text-gray-800 border border-gray-300 transition
-                duration-500 focus:outline-none focus:border-black rounded mb-4"
-              placeholder="Your comment here..."></vee-field>
-            <ErrorMessage class="text-red-600" name="comment" />
-            <button type="submit" class="py-1.5 px-3 rounded text-white bg-green-600 block"
+              class="block w-full py-2 px-4 text-gray-800 dark:text-gray-100 bg-white dark:bg-gray-700 border border-gray-300 dark:border-gray-600 transition-colors
+                duration-300 focus:outline-none focus:border-green-500 focus:ring-1 focus:ring-green-500 rounded-lg mb-4 resize-none"
+              placeholder="Your comment here..." rows="3"></vee-field>
+            <ErrorMessage class="text-red-600 dark:text-red-400 text-sm font-medium block mb-3" name="comment" />
+            <button type="submit" class="py-2 px-6 rounded-full text-white font-medium bg-green-600 hover:bg-green-700 shadow-sm transition-colors duration-300 disabled:opacity-50"
               :disabled="comment_in_submission">
               Submit
             </button>
           </vee-form>
           <!-- Comment Sorting -->
           <select v-model="sort"
-            class="block mt-4 py-1.5 px-3 text-gray-800 border border-gray-300 transition
-            duration-500 focus:outline-none focus:border-black rounded">
+            class="block mt-6 py-2 px-4 w-32 border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-700 dark:text-gray-200 transition-colors
+            duration-300 focus:outline-none focus:border-green-500 focus:ring-1 focus:ring-green-500 rounded-lg cursor-pointer">
             <option value="1">Latest</option>
             <option value="2">Oldest</option>
           </select>
@@ -59,16 +59,17 @@
       </div>
     </section>
     <!-- Comments -->
-    <ul class="container mx-auto">
-      <li class="p-6 bg-gray-50 border border-gray-200" v-for="comment in sortedComments"
+    <ul class="container mx-auto space-y-4 mb-10 pt-6">
+      <li class="p-6 bg-white dark:bg-gray-800 border border-gray-100 dark:border-gray-700 shadow-sm rounded-xl transition-colors duration-300" 
+        v-for="comment in sortedComments"
         :key="comment.docID">
         <!-- Comment Author -->
-        <div class="mb-5">
-          <div class="font-bold">{{ comment.name }}</div>
-          <time>{{ comment.datePosted }}</time>
+        <div class="mb-3 flex justify-between items-center border-b border-gray-100 dark:border-gray-700 pb-3 transition-colors duration-300">
+          <div class="font-bold text-gray-900 dark:text-gray-100 transition-colors">{{ comment.name }}</div>
+          <time class="text-sm text-gray-500 dark:text-gray-400 font-medium transition-colors">{{ comment.datePosted }}</time>
         </div>
 
-        <p>{{ comment.content }}</p>
+        <p class="text-gray-700 dark:text-gray-300 leading-relaxed transition-colors">{{ comment.content }}</p>
       </li>
     </ul>
   </main>

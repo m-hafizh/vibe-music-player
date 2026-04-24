@@ -46,8 +46,9 @@ export const usePlayerStore = defineStore('player', () => {
   function setVolume(val: number) {
     val = Math.max(0, Math.min(1, val))
     volume.value = val
+    muted.value = false
     if (sound.value) {
-      sound.value.volume(muted.value ? 0 : val)
+      sound.value.volume(val)
     }
     localStorage.setItem('player_volume', val.toString())
   }

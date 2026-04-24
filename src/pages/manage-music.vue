@@ -1,16 +1,20 @@
 <template>
-  <section class="container mx-auto mt-6">
-    <div class="md:grid md:grid-cols-3 md:gap-4">
-      <div class="col-span-1">
+  <section class="container mx-auto mt-8 mb-20 px-4">
+    <div class="md:grid md:grid-cols-3 md:gap-8">
+      <!-- Upload Sidebar -->
+      <div class="col-span-1 mb-8 md:mb-0">
         <app-upload ref="upload" :addSong="addSong" />
       </div>
+      <!-- Song List -->
       <div class="col-span-2">
-        <div class="bg-white rounded border border-gray-200 relative flex flex-col">
-          <div class="px-6 pt-6 pb-5 font-bold border-b border-gray-200">
-            <span class="card-title">{{ $t('manage.my_songs') }}</span>
-            <i class="fa fa-compact-disc float-right text-green-400 text-2xl"></i>
+        <div class="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-100 dark:border-gray-700 flex flex-col transition-colors duration-300">
+          <div class="px-6 py-5 border-b border-gray-100 dark:border-gray-700 flex justify-between items-center transition-colors duration-300">
+            <span class="font-bold text-xl text-gray-800 dark:text-white">{{ $t('manage.my_songs') }}</span>
+            <div class="w-10 h-10 rounded-full bg-green-50 dark:bg-gray-700 flex items-center justify-center text-green-500 dark:text-green-400 transition-colors duration-300">
+              <i class="fa fa-compact-disc text-xl"></i>
+            </div>
           </div>
-          <div class="p-6">
+          <div class="p-6 space-y-3">
             <!-- Composition Items -->
             <composition-item v-for="(song, i) in songs" :key="song.docID"
               :song="song"
