@@ -43,22 +43,23 @@
   </div>
 </template>
 
-<script>
-import { mapActions, mapGetters, mapState } from 'vuex';
+<script setup lang="ts">
+import { computed } from 'vue';
+import { usePlayerStore } from '@/stores/player';
 
-export default {
-  name: 'Player',
-  computed: {
-    ...mapGetters(['playing']),
-    ...mapState({
-      seek: (state) => state.player.seek,
-      duration: (state) => state.player.duration,
-      playerProgress: (state) => state.player.playerProgress,
-      currentSong: (state) => state.player.currentSong,
-    }),
-  },
-  methods: {
-    ...mapActions(['toggleAudio', 'updateSeek']),
-  },
-};
+const playerStore = usePlayerStore();
+
+const playing = computed(() => playerStore.playing);
+const seek = computed(() => playerStore.seek);
+const duration = computed(() => playerStore.duration);
+const playerProgress = computed(() => playerStore.playerProgress);
+const currentSong = computed(() => playerStore.currentSong);
+
+function toggleAudio() {
+  playerStore.toggleAudio();
+}
+
+function updateSeek(event: any) {
+  playerStore.updateSeek(event);
+}
 </script>

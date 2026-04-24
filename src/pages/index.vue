@@ -3,7 +3,7 @@
     <!-- Introduction -->
     <section class="mb-8 py-20 text-white text-center relative">
       <div class="absolute inset-0 w-full h-full bg-contain introduction-bg"
-        style="background-image: url(assets/img/header.png)"></div>
+        style="background-image: url(/assets/img/header.png)"></div>
       <div class="container mx-auto">
         <div class="text-white main-header-content">
           <!-- Introducting Heading -->
@@ -21,7 +21,7 @@
       </div>
 
       <img class="relative block mx-auto mt-5 -mb-20 w-auto max-w-full"
-        src="assets/img/introduction-music.png" />
+        src="/assets/img/introduction-music.png" />
     </section>
 
     <!-- Main Content -->
@@ -43,80 +43,71 @@
   </main>
 </template>
 
-<script>
+<script setup lang="ts">
+import { ref, onMounted, onUnmounted } from 'vue';
 import { databases, databaseId, songsCollectionId } from '@/includes/appwrite';
 import { Query } from 'appwrite';
 import AppSongItem from '@/components/SongItem.vue';
 import IconSecondary from '@/directives/icon-secondary';
 
-export default {
-  name: 'Home',
-  components: {
-    AppSongItem,
-  },
-  directives: {
-    'icon-secondary': IconSecondary,
-  },
-  data() {
-    return {
-      songs: [],
-      maxPerPage: 25,
-      pendingRequest: false,
-    };
-  },
-  async created() {
-    this.getSongs();
+const vIconSecondary = IconSecondary;
 
-    window.addEventListener('scroll', this.handleScroll);
-  },
-  beforeUnmount() {
-    window.removeEventListener('scroll', this.handleScroll);
-  },
-  methods: {
-    handleScroll() {
-      const { scrollTop, offsetHeight } = document.documentElement;
-      const { innerHeight } = window;
-      const bottomOfWindow = Math.round(scrollTop) + innerHeight === offsetHeight;
+const songs = ref<any[]>([]);
+const maxPerPage = 25;
+const pendingRequest = ref(false);
 
-      if (bottomOfWindow) {
-        this.getSongs();
-      }
-    },
-    async getSongs() {
-      if (this.pendingRequest) {
-        return;
-      }
+onMounted(() => {
+  getSongs();
+  window.addEventListener('scroll', handleScroll);
+});
 
-      this.pendingRequest = true;
+onUnmounted(() => {
+  window.removeEventListener('scroll', handleScroll);
+});
 
-      const queries = [
-        Query.orderAsc('modified_name'),
-        Query.limit(this.maxPerPage),
-      ];
+function handleScroll() {
+  const { scrollTop, offsetHeight } = document.documentElement;
+  const { innerHeight } = window;
+  const bottomOfWindow = Math.round(scrollTop) + innerHeight === offsetHeight;
 
-      if (this.songs.length) {
-        queries.push(Query.cursorAfter(this.songs[this.songs.length - 1].docID));
-      }
+  if (bottomOfWindow) {
+    getSongs();
+  }
+}
 
-      try {
-        const response = await databases.listDocuments(
-          databaseId,
-          songsCollectionId,
-          queries,
-        );
+async function getSongs() {
+  if (pendingRequest.value) {
+    return;
+  }
 
-        response.documents.forEach((document) => {
-          this.songs.push({
-            docID: document.$id,
-            ...document,
-          });
-        });
-      } catch (error) {
-        // console.log(error);
-      }
+  pendingRequest.value = true;
 
-      this.pendingRequest = false;
-    },
-  },
-};
+  const queries = [
+    Query.orderAsc('modified_name'),
+    Query.limit(maxPerPage),
+  ];
+
+  if (songs.value.length) {
+    queries.push(Query.cursorAfter(songs.value[songs.value.length - 1].docID));
+  }
+
+  try {
+    const response = await databases.listDocuments(
+      databaseId,
+      songsCollectionId,
+      queries,
+    );
+
+    response.documents.forEach((document) => {
+      songs.value.push({
+        docID: document.$id,
+        ...document,
+      });
+    });
+  } catch (error) {
+    // console.log(error);
+  }
+
+  pendingRequest.value = false;
+}
 </script>

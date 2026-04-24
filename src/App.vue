@@ -7,28 +7,25 @@
     </transition>
   </router-view>
 
-  <app-player />
+  <app-player v-if="playerStore.currentSong.modified_name" />
 
   <auth-modal />
-
 </template>
 
-<script>
+<script setup lang="ts">
+import { onMounted } from 'vue';
 import AppPlayer from '@/components/Player.vue';
-import AppHeader from './components/Header.vue';
-import AuthModal from './components/Auth.vue';
+import AppHeader from '@/components/Header.vue';
+import AuthModal from '@/components/Auth.vue';
+import { useAuthStore } from '@/stores/auth';
+import { usePlayerStore } from '@/stores/player';
 
-export default {
-  name: 'App',
-  components: {
-    AppHeader,
-    AuthModal,
-    AppPlayer,
-  },
-  created() {
-    this.$store.dispatch('init_login');
-  },
-};
+const authStore = useAuthStore();
+const playerStore = usePlayerStore();
+
+onMounted(() => {
+  authStore.init_login();
+});
 </script>
 
 <style>

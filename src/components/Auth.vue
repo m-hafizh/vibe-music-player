@@ -55,31 +55,17 @@
   </div>
 </template>
 
-<script>
-import { mapMutations, mapState } from 'vuex';
+<script setup lang="ts">
+import { ref, computed } from 'vue';
+import { useAuthStore } from '@/stores/auth';
 import AppLoginForm from './LoginForm.vue';
 import AppRegisterForm from './RegisterForm.vue';
 
-export default {
-  name: 'Auth',
-  components: {
-    AppLoginForm, AppRegisterForm,
-  },
-  data() {
-    return {
-      tab: 'login',
-    };
-  },
-  computed: {
-    // ...mapState({
-    //   modal: 'authModalShow',
-    // }),
-    ...mapState({
-      authModalShow: (state) => state.auth.authModalShow,
-    }),
-  },
-  methods: {
-    ...mapMutations(['toggleAuthModal']),
-  },
-};
+const authStore = useAuthStore();
+const tab = ref('login');
+const authModalShow = computed(() => authStore.authModalShow);
+
+function toggleAuthModal() {
+  authStore.toggleAuthModal();
+}
 </script>

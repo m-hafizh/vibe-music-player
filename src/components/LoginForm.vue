@@ -31,41 +31,39 @@
   </vee-form>
 </template>
 
-<script>
-export default {
-  name: 'LoginForm',
-  data() {
-    return {
-      loginSchema: {
-        email: 'required|email',
-        password: 'required|min:3|max:32',
-      },
-      login_in_submission: false,
-      login_show_alert: false,
-      login_alert_variant: 'bg-blue-500',
-      login_alert_msg: 'Please wait! We are logging you in.',
-    };
-  },
-  methods: {
-    async login(values) {
-      this.login_in_submission = true;
-      this.login_show_alert = true;
-      this.login_alert_variant = 'bg-blue-500';
-      this.login_alert_msg = 'Please wait! We are logging you in.';
+<script setup lang="ts">
+import { ref } from 'vue';
+import { useAuthStore } from '@/stores/auth';
 
-      try {
-        await this.$store.dispatch('login', values);
-      } catch (error) {
-        this.login_in_submission = false;
-        this.login_alert_variant = 'bg-red-500';
-        this.login_alert_msg = 'Invalid login details.';
-        return;
-      }
+const authStore = useAuthStore();
 
-      this.login_alert_variant = 'bg-green-500';
-      this.login_alert_msg = 'Success! You are now logged in.';
-      window.location.reload();
-    },
-  },
+const loginSchema = {
+  email: 'required|email',
+  password: 'required|min:3|max:32',
 };
+
+const login_in_submission = ref(false);
+const login_show_alert = ref(false);
+const login_alert_variant = ref('bg-blue-500');
+const login_alert_msg = ref('Please wait! We are logging you in.');
+
+async function login(values: any) {
+  login_in_submission.value = true;
+  login_show_alert.value = true;
+  login_alert_variant.value = 'bg-blue-500';
+  login_alert_msg.value = 'Please wait! We are logging you in.';
+
+  try {
+    await authStore.login(values);
+  } catch (error) {
+    login_in_submission.value = false;
+    login_alert_variant.value = 'bg-red-500';
+    login_alert_msg.value = 'Invalid login details.';
+    return;
+  }
+
+  login_alert_variant.value = 'bg-green-500';
+  login_alert_msg.value = 'Success! You are now logged in.';
+  window.location.reload();
+}
 </script>

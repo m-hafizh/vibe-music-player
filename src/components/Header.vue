@@ -4,7 +4,7 @@
     <nav class="container mx-auto flex justify-start items-center py-5 px-4">
       <!-- App Name -->
       <router-link class="text-white font-bold uppercase text-2xl mr-4"
-        :to="{ name: 'home' }" exact-active-class="no-active">
+        to="/" exact-active-class="no-active">
         Music
       </router-link>
 
@@ -13,7 +13,7 @@
         <ul class="flex flex-row mt-1">
           <!-- Navigation Links -->
           <li>
-            <router-link class="px-2 text-white" :to="{ name: 'about' }">
+            <router-link class="px-2 text-white" to="/about">
               About
             </router-link>
           </li>
@@ -24,7 +24,7 @@
           </li>
           <template v-else>
             <li>
-              <router-link class="px-2 text-white" :to="{ name: 'manage' }">
+              <router-link class="px-2 text-white" to="/manage-music">
                 Manage
               </router-link>
             </li>
@@ -46,38 +46,32 @@
   </header>
 </template>
 
-<script>
-import { mapMutations, mapState } from 'vuex';
+<script setup lang="ts">
+import { computed } from 'vue';
+import { useAuthStore } from '@/stores/auth';
+import { useRouter, useRoute } from 'vue-router';
+import { useI18n } from 'vue-i18n';
 
-export default {
-  name: 'Header',
-  computed: {
-    ...mapState({
-      userLoggedIn: (state) => state.auth.userLoggedIn,
-    }),
-    currentLocale() {
-      return this.$i18n.locale === 'fr' ? 'French' : 'English';
-    },
-  },
-  methods: {
-    ...mapMutations(['toggleAuthModal']),
-    signout() {
-      this.$store.dispatch('signout', {
-        router: this.$router,
-        route: this.$route,
-      });
+const authStore = useAuthStore();
+const router = useRouter();
+const route = useRoute();
+const { locale } = useI18n();
 
-      // console.log(this.$route);
-      if (this.$route.meta.requiresAuth) {
-        this.$router.push({ name: 'home' });
-      }
-    },
-    changeLocale() {
-      this.$i18n.locale = this.$i18n.locale === 'fr' ? 'en' : 'fr';
-    },
-    // toggleAuthModal() {
-    //   this.$store.commit('toggleAuthModal');
-    // },
-  },
-};
+const userLoggedIn = computed(() => authStore.userLoggedIn);
+const currentLocale = computed(() => locale.value === 'fr' ? 'French' : 'English');
+
+function toggleAuthModal() {
+  authStore.toggleAuthModal();
+}
+
+async function signout() {
+  await authStore.signout();
+  if (route.meta.requiresAuth) {
+    router.push({ path: '/' });
+  }
+}
+
+function changeLocale() {
+  locale.value = locale.value === 'fr' ? 'en' : 'fr';
+}
 </script>
