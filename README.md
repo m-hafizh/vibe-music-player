@@ -1,34 +1,39 @@
-# music
+# Vibe Music Player — v2.1
 
-## Project setup
-```
+## Simple Description
+v2.1 expands the player experience with richer playback controls, keyboard shortcuts, and search/filter flow.
+
+## Tech Stack
+- Vue 3 + TypeScript
+- Vite
+- Pinia
+- Vue Router 4
+- Howler.js
+- Tailwind CSS
+- VeeValidate
+- Appwrite SDK
+
+## UI Design and Styling
+- Refined player controls and homepage usability
+- Search UI integrated into main song list area
+- Tailwind utility-first styling with lightweight custom CSS animations
+
+## Features
+- Playlist array with next / previous navigation
+- Auto-play next song
+- Shuffle and repeat modes
+- Persistent volume memory
+- Keyboard shortcuts for playback control
+- Search and filter for songs
+
+## Project Scripts
+```bash
 yarn install
-```
-
-### Compiles and hot-reloads for development
-```
-yarn serve
-```
-
-### Compiles and minifies for production
-```
+yarn dev
 yarn build
-```
-
-### Run your unit tests
-```
 yarn test:unit
-```
-
-### Run your end-to-end tests
-```
-yarn test:e2e
-```
-
-### Lints and fixes files
-```
 yarn lint
 ```
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+## Version Note
+This version is the first major feature expansion on top of the migrated modern stack.
