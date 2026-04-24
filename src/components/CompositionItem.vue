@@ -1,5 +1,5 @@
 <template>
-  <div class="group border border-gray-100 dark:border-gray-700 bg-white dark:bg-gray-800 p-4 rounded-xl hover:shadow-md transition-all duration-300 mb-4">
+  <div class="group border border-gray-100 dark:border-gray-700 bg-white dark:bg-gray-800 p-4 rounded-xl shadow-sm dark:shadow-none hover:shadow-md transition-all duration-300 mb-4">
     <!-- Read View -->
     <div v-show="!showForm" class="flex items-center justify-between">
       <div class="flex-grow pr-4 overflow-hidden">
@@ -27,29 +27,29 @@
       <vee-form :validation-schema="schema" :initial-values="song"
         @submit="onSubmitForm">
         <div class="mb-4">
-          <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1 transition-colors duration-300">Song Title</label>
+          <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1 transition-colors duration-300">{{ $t('composition.song_title_label') }}</label>
           <vee-field type="text" name="modified_name"
             class="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white rounded-lg text-sm focus:ring-2 focus:ring-green-500 focus:border-green-500 outline-none transition-colors duration-300"
-            placeholder="Enter Song Title"
+            :placeholder="$t('composition.song_title_placeholder')"
             @input="updateUnsavedFlag(true)" />
           <ErrorMessage class="text-red-500 dark:text-red-400 text-xs mt-1 block" name="modified_name" />
         </div>
         <div class="mb-5">
-          <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1 transition-colors duration-300">Genre</label>
+          <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1 transition-colors duration-300">{{ $t('composition.genre_label') }}</label>
           <vee-field type="text" name="genre"
             class="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white rounded-lg text-sm focus:ring-2 focus:ring-green-500 focus:border-green-500 outline-none transition-colors duration-300"
-            placeholder="Enter Genre"
+            :placeholder="$t('composition.genre_placeholder')"
             @input="updateUnsavedFlag(true)" />
           <ErrorMessage class="text-red-500 dark:text-red-400 text-xs mt-1 block" name="genre" />
         </div>
         <div class="flex justify-end space-x-3 pt-4 border-t border-gray-100 dark:border-gray-700 mt-2 transition-colors duration-300">
           <button type="button" class="py-2 px-4 rounded-lg text-sm font-medium text-gray-600 dark:text-gray-300 bg-gray-100 dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors focus:outline-none"
             :disabled="in_submission" @click.prevent="showForm = false">
-            Cancel
+            {{ $t('composition.cancel') }}
           </button>
           <button type="submit" class="py-2 px-4 rounded-lg text-sm font-medium text-white bg-green-600 hover:bg-green-700 transition-colors focus:outline-none shadow-sm"
             :disabled="in_submission">
-            Save Changes
+            {{ $t('composition.save_changes') }}
           </button>
         </div>
       </vee-form>
@@ -81,6 +81,8 @@
 
 <script setup lang="ts">
 import { ref } from 'vue'
+import { useI18n } from 'vue-i18n'
+import { useToastStore } from '@/stores/toast'
 import ConfirmModal from '@/components/ConfirmModal.vue'
 import {
   databases, databaseId, songsCollectionId, storage, storageBucketId,
@@ -93,6 +95,9 @@ const props = defineProps<{
   removeSong: (i: number) => void
   updateUnsavedFlag: (value: boolean) => void
 }>()
+
+const { t } = useI18n()
+const toastStore = useToastStore()
 
 const showForm = ref(false)
 const showDeleteModal = ref(false)
@@ -107,7 +112,7 @@ const schema = {
 const in_submission = ref(false)
 const show_alert = ref(false)
 const alert_variant = ref('bg-blue-50 text-blue-700')
-const alert_message = ref('Please wait! Updating song info.')
+const alert_message = ref('')
 
 function onSubmitForm(values: any) {
   pendingValues.value = values
@@ -122,14 +127,14 @@ async function confirmSubmit() {
   in_submission.value = true
   show_alert.value = true
   alert_variant.value = 'bg-blue-50 text-blue-700'
-  alert_message.value = 'Please wait! Updating song info.'
+  alert_message.value = t('composition.updating')
 
   try {
     await databases.updateDocument(databaseId, songsCollectionId, props.song.docID, values)
   } catch (error) {
     in_submission.value = false
     alert_variant.value = 'bg-red-50 text-red-700'
-    alert_message.value = 'Something went wrong! Try again later'
+    alert_message.value = t('composition.update_error')
     return
   }
 
@@ -138,22 +143,28 @@ async function confirmSubmit() {
 
   in_submission.value = false
   alert_variant.value = 'bg-green-50 text-green-700'
-  alert_message.value = 'Success!'
+  alert_message.value = t('composition.update_success')
   pendingValues.value = null
 }
 
 async function confirmDelete() {
   showDeleteModal.value = false
 
-  if (props.song.file_id) {
-    try {
-      await storage.deleteFile(storageBucketId, props.song.file_id)
-    } catch (e) {
-      // File might not exist or be corrupted, continue to delete document
+  try {
+    if (props.song.file_id) {
+      try {
+        await storage.deleteFile(storageBucketId, props.song.file_id)
+      } catch (e) {
+        // File might not exist or be corrupted, continue to delete document
+      }
     }
-  }
 
-  await databases.deleteDocument(databaseId, songsCollectionId, props.song.docID)
-  props.removeSong(props.index)
+    await databases.deleteDocument(databaseId, songsCollectionId, props.song.docID)
+    props.removeSong(props.index)
+    toastStore.showToast('Song deleted successfully.', 'success')
+  } catch (error) {
+    console.error('Delete song error:', error)
+    toastStore.showToast('Failed to delete song.', 'error')
+  }
 }
 </script>

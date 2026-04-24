@@ -14,6 +14,7 @@
 - [Authentication](#authentication)
 - [Music Player Engine](#music-player-engine)
 - [Song Management](#song-management)
+- [Playlist System](#playlist-system)
 - [Commenting System](#commenting-system)
 - [Internationalization (i18n)](#internationalization-i18n)
 - [Keyboard Shortcuts](#keyboard-shortcuts)
@@ -46,7 +47,7 @@
 | **Backend (BaaS)**   | [Appwrite](https://appwrite.io/) (Auth, Database, Storage)          |
 | **Audio Engine**     | [Howler.js](https://howlerjs.com/) — HTML5 audio with Web Audio API |
 | **Form Validation**  | [VeeValidate 4](https://vee-validate.logaretm.com/) + `@vee-validate/rules` |
-| **i18n**             | [vue-i18n 9](https://vue-i18n.intlify.dev/) (English & French)     |
+| **i18n**             | [vue-i18n 9](https://vue-i18n.intlify.dev/) (multi-locale: en, fr, de, id, ja, ko, nl, zh) |
 | **PWA**              | [vite-plugin-pwa](https://github.com/vite-pwa/vite-plugin-pwa)     |
 | **Progress Bar**     | [NProgress](https://ricostacruz.com/nprogress/)                     |
 | **Auto-Imports**     | `unplugin-auto-import` + `unplugin-vue-components`                  |
@@ -86,21 +87,32 @@ music-player/
 │   │   ├── Upload.vue             # Drag-and-drop file uploader with progress
 │   │   ├── CompositionItem.vue    # Editable song item (edit, delete with confirmation)
 │   │   ├── SongItem.vue           # Song list item for homepage
+│   │   ├── PlaylistCard.vue       # Playlist card for grid/list displays
+│   │   ├── PlaylistGrid.vue       # Reusable playlist grid section
+│   │   ├── PlaylistSongItem.vue   # Song row item inside playlist detail page
+│   │   ├── AddToPlaylistModal.vue # Add/remove song to/from user playlists
+│   │   ├── CreatePlaylistModal.vue # Create/edit playlist modal
 │   │   ├── ConfirmModal.vue       # Reusable confirmation dialog (danger/success/info variants)
+│   │   ├── ToastContainer.vue     # Global toast notifications
 │   │   ├── HelloI18n.vue          # i18n demo component
 │   │   └── base/
 │   │       └── Button.vue         # Base button component (auto-registered)
 │   │
 │   ├── pages/                     # File-based routing (unplugin-vue-router)
-│   │   ├── index.vue              # Home — hero section + song list with search & infinite scroll
+│   │   ├── index.vue              # Home — hero section + song list with search & pagination
 │   │   ├── about.vue              # About page
+│   │   ├── library.vue            # Playlist library (public viewing, create for logged-in users)
 │   │   ├── manage-music.vue       # Upload & manage songs (auth required)
+│   │   └── playlist/
+│   │       └── [id].vue           # Playlist detail page (songs, play all, owner actions)
 │   │   └── song/
 │   │       └── [id].vue           # Song detail — play, comment, sort comments
 │   │
 │   ├── stores/                    # Pinia stores
 │   │   ├── auth.ts                # Auth state (register, login, logout, session persistence)
 │   │   ├── player.ts              # Player state (playlist, playback, shuffle, repeat, volume)
+│   │   ├── playlist.ts            # Playlist CRUD, playlist songs, membership lookup
+│   │   ├── toast.ts               # Toast notification queue/state
 │   │   └── theme.ts               # Theme state (dark/light/system with OS preference detection)
 │   │
 │   ├── router/
@@ -138,22 +150,23 @@ music-player/
 - **User Authentication** — Register, login, logout with session persistence via Appwrite
 - **Music Upload** — Drag-and-drop or click-to-browse MP3 uploader with real-time progress tracking
 - **Audio Playback** — Full-featured player with play, pause, seek, scrub, next, previous
-- **Playlist Management** — Auto-generated playlist from loaded songs
+- **Playlist Management** — Create, edit, delete playlists and add/remove songs via modal workflow
 - **Shuffle & Repeat** — Three repeat modes (off → all → one) and shuffle toggle
 - **Volume Control** — Adjustable volume slider with mute toggle, persisted to localStorage
 - **Song Search** — Real-time search with debounce and URL query sync
-- **Infinite Scroll** — Paginated song loading triggered by scroll position
+- **Pagination** — Home and manage pages include paginated song lists with explicit controls
 - **Comments** — Add and view comments on songs, with sort by latest/oldest
 - **Song Management** — Edit song title/genre, delete songs (with file cleanup)
 
 ### UX Features
 - **Dark Mode** — Three-way toggle: Light / Dark / System (auto-detects OS preference)
-- **Internationalization** — English and French language support
+- **Internationalization** — Multi-language support (`en`, `fr`, `de`, `id`, `ja`, `ko`, `nl`, `zh`)
 - **Keyboard Shortcuts** — Spacebar, arrow keys, S/R/M for playback control
 - **Page Transitions** — Fade transitions between routes
 - **Progress Bar** — NProgress loading indicator during route navigation
 - **Confirmation Modals** — Reusable modal for destructive actions (delete, logout, upload)
 - **Unsaved Changes Guard** — Warns before navigating away from unsaved edits
+- **Toast Notifications** — Global success/error/info feedback for playlist and song operations
 - **PWA Support** — Installable as a progressive web app with auto-update
 
 ---
@@ -204,6 +217,7 @@ Powered by **Appwrite Account & Databases** services:
 - Sessions are persisted by Appwrite's cookie-based sessions
 - Auth state is managed globally via the `auth` Pinia store (`userLoggedIn` ref)
 - Route guard redirects unauthenticated users from protected pages to `/`
+- `init_login()` intentionally calls `account.get()` on app startup; guests receive a 401 which is expected and simply resolves to `userLoggedIn = false`
 
 ---
 
@@ -219,6 +233,13 @@ Built on **Howler.js** for cross-browser HTML5 audio:
 - **Volume**: 0–1 range with localStorage persistence, mute toggle
 - **Auto-Advance**: Plays next song on track end, respects repeat/shuffle settings
 - **Previous Track**: Restarts current song if > 3 seconds elapsed, otherwise goes to previous
+- **Always-Visible Player Bar**: Player is rendered even before first song selection
+- **Initial Idle State**: Before first playback, controls are disabled, metadata shows `-`, and playlist plus/check icon is hidden
+- **Responsive Layout Bands**:
+  - `< 640px`: mobile stacked controls
+  - `640px – 1070px`: compact tablet/small-laptop layout
+  - `>= 1071px`: desktop multi-column layout
+- **Auth-Aware Playlist Icon**: Plus/check icon only appears when user is logged in and a song is active
 
 ---
 
@@ -232,7 +253,28 @@ On the **Manage Music** page (`/manage-music`, auth required):
   - Real-time upload progress bar with status icons
 - **Edit**: Inline form to update song title and genre
 - **Delete**: Removes both the storage file and database document
+- **Search + Pagination**: Manage Music page supports client-side search and paginated results (5 songs per page)
 - All destructive actions require confirmation via `ConfirmModal`
+
+---
+
+## Playlist System
+
+- **Playlist Library** (`/library`)
+  - View playlists in a responsive grid
+  - Guests can browse public playlists
+  - Playlist creation actions are shown only to logged-in users
+- **Playlist Detail** (`/playlist/:id`)
+  - Playlist header with metadata and gradient styling
+  - Song list with play-at-index, play all, and shuffle play actions
+  - Owner-only edit/delete/remove-song operations
+- **Add to Playlist Modal**
+  - Shows current membership per playlist
+  - Supports staged add/remove changes
+  - Applies changes in one explicit action with success/error toasts
+- **Membership Lookup Cache**
+  - `playlist` store maintains a fast lookup map for song-in-playlist checks
+  - Keeps song list and player bar plus/check indicators in sync
 
 ---
 
@@ -252,7 +294,7 @@ On the **Song Detail** page (`/song/[id]`):
 
 Using **vue-i18n 9** with Composition API (`legacy: false`):
 
-- **Supported Locales**: English (`en`), French (`fr`)
+- **Supported Locales**: English (`en`), French (`fr`), German (`de`), Indonesian (`id`), Japanese (`ja`), Korean (`ko`), Dutch (`nl`), Chinese (`zh`)
 - **Locale Files**: JSON files in `src/locales/`
 - **Lazy Loading**: Files imported eagerly via `import.meta.glob`
 - **Language Switcher**: Dropdown in the header navbar
@@ -292,7 +334,7 @@ Configured via `vite-plugin-pwa`:
 
 ## State Management
 
-Three **Pinia** stores using the Composition API (`setup` store) syntax:
+Five **Pinia** stores using the Composition API (`setup` store) syntax:
 
 ### `auth` Store
 - `authModalShow` — controls auth modal visibility
@@ -304,6 +346,15 @@ Three **Pinia** stores using the Composition API (`setup` store) syntax:
 - `playing`, `playlist`, `currentIndex`, `shuffle`, `repeat`, `volume`, `muted`
 - Computed: `hasNext`, `hasPrev`
 - Actions: `newSong`, `toggleAudio`, `nextSong`, `prevSong`, `updateSeek`, `setVolume`, `toggleMute`, `toggleShuffle`, `toggleRepeat`, `setPlaylist`, `playIndex`
+
+### `playlist` Store
+- `userPlaylists`, `currentPlaylist`, `currentPlaylistSongs`, `userPlaylistSongLookup`
+- Supports playlist CRUD and playlist-song relations
+- Provides membership helpers used by `SongItem`, `Player`, and playlist modal flows
+
+### `toast` Store
+- Global toast queue with auto-dismiss support
+- Used across upload, playlist, and management flows
 
 ### `theme` Store
 - `themeMode` — `'dark' | 'light' | 'system'` (persisted to localStorage)
@@ -321,7 +372,9 @@ File-based routing via `unplugin-vue-router`:
 | ------------------ | -------------------- | ------------- |
 | `/`                | Home (song list)     | No            |
 | `/about`           | About page           | No            |
+| `/library`         | Playlist library     | No            |
 | `/manage-music`    | Upload & manage      | Yes           |
+| `/playlist/:id`    | Playlist detail      | No            |
 | `/song/:id`        | Song detail & comments | No          |
 
 - **Navigation Guard**: `beforeEach` check for `meta.requiresAuth`
@@ -364,17 +417,19 @@ Simplified variant accepting an object `{ icon: string, right?: boolean }`.
 
 ## Environment Variables
 
-| Variable                             | Description                    |
-| ------------------------------------ | ------------------------------ |
-| `VITE_I18N_LOCALE`                   | Default locale (`en`)          |
-| `VITE_I18N_FALLBACK_LOCALE`          | Fallback locale (`en`)         |
-| `VITE_APPWRITE_ENDPOINT`             | Appwrite API endpoint          |
-| `VITE_APPWRITE_PROJECT_ID`           | Appwrite project ID            |
-| `VITE_APPWRITE_DATABASE_ID`          | Appwrite database ID           |
-| `VITE_APPWRITE_USERS_COLLECTION_ID`  | Users collection ID            |
-| `VITE_APPWRITE_SONGS_COLLECTION_ID`  | Songs collection ID            |
-| `VITE_APPWRITE_COMMENTS_COLLECTION_ID` | Comments collection ID       |
-| `VITE_APPWRITE_BUCKET_ID`            | Storage bucket ID              |
+| Variable                                     | Description                    |
+| ---------------------------------------------| ------------------------------ |
+| `VITE_I18N_LOCALE`                           | Default locale (`en`)          |
+| `VITE_I18N_FALLBACK_LOCALE`                  | Fallback locale (`en`)         |
+| `VITE_APPWRITE_ENDPOINT`                     | Appwrite API endpoint          |
+| `VITE_APPWRITE_PROJECT_ID`                   | Appwrite project ID            |
+| `VITE_APPWRITE_DATABASE_ID`                  | Appwrite database ID           |
+| `VITE_APPWRITE_USERS_COLLECTION_ID`          | Users collection ID            |
+| `VITE_APPWRITE_SONGS_COLLECTION_ID`          | Songs collection ID            |
+| `VITE_APPWRITE_COMMENTS_COLLECTION_ID`       | Comments collection ID         |
+| `VITE_APPWRITE_PLAYLISTS_COLLECTION_ID`      | Playlists collection ID        |
+| `VITE_APPWRITE_PLAYLIST_SONGS_COLLECTION_ID` | Playlist songs collection ID   |
+| `VITE_APPWRITE_BUCKET_ID`                    | Storage bucket ID              |
 
 ---
 

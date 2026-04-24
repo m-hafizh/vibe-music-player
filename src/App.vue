@@ -8,9 +8,10 @@
       </transition>
     </router-view>
 
-    <app-player v-if="playerStore.currentSong.modified_name" />
+  <app-player />
 
     <auth-modal />
+    <toast-container />
   </div>
 </template>
 
@@ -19,6 +20,7 @@ import { onMounted } from 'vue';
 import AppPlayer from '@/components/Player.vue';
 import AppHeader from '@/components/Header.vue';
 import AuthModal from '@/components/Auth.vue';
+import ToastContainer from '@/components/ToastContainer.vue';
 import { useAuthStore } from '@/stores/auth';
 import { usePlayerStore } from '@/stores/player';
 import { useThemeStore } from '@/stores/theme';

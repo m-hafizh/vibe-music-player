@@ -1,0 +1,121 @@
+{
+  "nav": {
+    "about": "Tentang",
+    "library": "Perpustakaan",
+    "manage": "Kelola",
+    "login_register": "Masuk / Daftar",
+    "logout": "Keluar"
+  },
+  "home": {
+    "listen": "Dengarkan Musik Terbaik!",
+    "description": "Temukan dan nikmati koleksi musik pribadi Anda. Unggah, atur, dan streaming lagu favorit Anda."
+  },
+  "songs": {
+    "title": "Lagu",
+    "search_placeholder": "Cari lagu berdasarkan judul..."
+  },
+  "manage": {
+    "my_songs": "Lagu Saya"
+  },
+  "auth": {
+    "welcome": "Selamat Datang",
+    "login_tab": "Masuk",
+    "register_tab": "Daftar"
+  },
+  "login": {
+    "email_label": "Alamat email",
+    "email_placeholder": "anda{'@'}contoh.com",
+    "password_label": "Kata sandi",
+    "password_placeholder": "••••••••",
+    "sign_in": "Masuk",
+    "logging_in": "Mohon tunggu! Kami sedang memasukkan Anda.",
+    "success": "Berhasil! Anda sekarang sudah masuk.",
+    "error": "Detail login tidak valid."
+  },
+  "register": {
+    "name_label": "Nama Lengkap",
+    "name_placeholder": "Budi Santoso",
+    "email_label": "Alamat email",
+    "email_placeholder": "anda{'@'}contoh.com",
+    "age_label": "Usia",
+    "age_placeholder": "18",
+    "password_label": "Kata sandi",
+    "confirm_label": "Konfirmasi",
+    "password_placeholder": "••••••••",
+    "country_label": "Negara",
+    "create_account": "Buat Akun",
+    "creating": "Mohon tunggu! Akun Anda sedang dibuat.",
+    "success": "Berhasil! Akun Anda telah dibuat.",
+    "error": "Terjadi kesalahan. Silakan coba lagi nanti.",
+    "TOS": "Ketentuan Layanan",
+    "accept": "Saya menerima {0} Music"
+  },
+  "upload": {
+    "title": "Unggah",
+    "drop_files": "Letakkan file Anda di sini",
+    "or_click": "atau klik untuk menelusuri"
+  },
+  "song": {
+    "comment_count": "Belum ada komentar | 1 Komentar | {count} Komentar",
+    "comment_placeholder": "Komentar Anda di sini...",
+    "submit": "Kirim",
+    "sort_latest": "Terbaru",
+    "sort_oldest": "Terlama",
+    "commenting": "Mohon tunggu! Komentar Anda sedang dikirim",
+    "comment_success": "Komentar ditambahkan!"
+  },
+  "composition": {
+    "song_title_label": "Judul Lagu",
+    "song_title_placeholder": "Masukkan Judul Lagu",
+    "genre_label": "Genre",
+    "genre_placeholder": "Masukkan Genre",
+    "cancel": "Batal",
+    "save_changes": "Simpan",
+    "updating": "Mohon tunggu! Memperbarui info lagu.",
+    "update_success": "Berhasil!",
+    "update_error": "Terjadi kesalahan! Coba lagi nanti"
+  },
+  "playlist": {
+    "your_playlists": "Playlist Anda",
+    "create": "Buat Playlist",
+    "edit": "Edit Playlist",
+    "delete": "Hapus Playlist",
+    "add_song": "Tambah ke Playlist",
+    "remove_song": "Hapus dari Playlist",
+    "empty": "Playlist ini kosong",
+    "empty_desc": "Tambahkan lagu dari halaman utama untuk memulai.",
+    "no_playlists": "Anda belum membuat playlist",
+    "no_playlists_desc": "Mudah! Tekan tombol di bawah dan mulai tambahkan lagu favorit Anda.",
+    "create_first": "Buat playlist pertama Anda",
+    "song_count": "Tidak ada lagu | 1 lagu | {count} lagu",
+    "play_all": "Putar Semua",
+    "library": "Perpustakaan",
+    "label_playlist": "Playlist",
+    "loading": "Memuat...",
+    "name_label": "Nama Playlist",
+    "name_placeholder": "Playlist Keren Saya",
+    "desc_label": "Deskripsi",
+    "desc_optional": "opsional",
+    "desc_placeholder": "Tambahkan deskripsi...",
+    "cover_color": "Warna Sampul",
+    "create_new": "Buat playlist baru",
+    "add_to_playlist": "Tambah ke Playlist",
+    "song_added": "Lagu ditambahkan!",
+    "already_in_playlist": "Lagu sudah ada di playlist ini.",
+    "add_failed": "Gagal menambahkan lagu. Coba lagi."
+  },
+  "about": {
+    "heading": "Kenali Vibe.",
+    "subtitle": "Cara terindah untuk mengelola, mengatur, dan mendengarkan koleksi musik pribadi Anda.",
+    "p1": "Vibe adalah pemutar musik modern dan open-source yang dibangun untuk performa dan keindahan. Didukung oleh Vue 3, Vite, dan Appwrite.",
+    "p2": "Baik Anda mengunggah perpustakaan genre yang luas atau streaming beberapa favorit, mesin audio Vibe menjamin transisi yang sempurna.",
+    "p3": "Desain adalah inti dari semua yang kami lakukan. Kami menghilangkan kompleksitas untuk menyisakan yang penting: musik Anda.",
+    "start_listening": "Mulai Mendengarkan"
+  },
+  "confirm": {
+    "cancel": "Batal",
+    "logout_title": "Konfirmasi Keluar",
+    "logout_message": "Apakah Anda yakin ingin keluar dari akun Anda?",
+    "logout_btn": "Keluar"
+  }
+}

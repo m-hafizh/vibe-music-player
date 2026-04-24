@@ -1,15 +1,121 @@
 {
+  "nav": {
+    "about": "À propos",
+    "library": "Bibliothèque",
+    "manage": "Gérer",
+    "login_register": "Connexion / Inscription",
+    "logout": "Déconnexion"
+  },
   "home": {
-    "listen": "Écoutez de la bonne musique!"
+    "listen": "Écoutez de la bonne musique!",
+    "description": "Découvrez et profitez de votre collection musicale personnelle. Téléchargez, organisez et diffusez vos morceaux préférés."
+  },
+  "songs": {
+    "title": "Chansons",
+    "search_placeholder": "Rechercher par titre..."
   },
   "manage": {
     "my_songs": "Mes chansons"
   },
+  "auth": {
+    "welcome": "Bienvenue",
+    "login_tab": "Connexion",
+    "register_tab": "Inscription"
+  },
+  "login": {
+    "email_label": "Adresse e-mail",
+    "email_placeholder": "vous{'@'}exemple.com",
+    "password_label": "Mot de passe",
+    "password_placeholder": "••••••••",
+    "sign_in": "Se connecter",
+    "logging_in": "Veuillez patienter ! Connexion en cours.",
+    "success": "Succès ! Vous êtes connecté.",
+    "error": "Identifiants invalides."
+  },
   "register": {
-    "TOS": "",
-    "accept": ""
+    "name_label": "Nom complet",
+    "name_placeholder": "Jean Dupont",
+    "email_label": "Adresse e-mail",
+    "email_placeholder": "vous{'@'}exemple.com",
+    "age_label": "Âge",
+    "age_placeholder": "18",
+    "password_label": "Mot de passe",
+    "confirm_label": "Confirmer",
+    "password_placeholder": "••••••••",
+    "country_label": "Pays",
+    "create_account": "Créer un compte",
+    "creating": "Veuillez patienter ! Votre compte est en cours de création.",
+    "success": "Succès ! Votre compte a été créé.",
+    "error": "Une erreur inattendue s'est produite. Veuillez réessayer.",
+    "TOS": "Conditions d'utilisation",
+    "accept": "J'accepte les {0} de Music"
+  },
+  "upload": {
+    "title": "Télécharger",
+    "drop_files": "Déposez vos fichiers ici",
+    "or_click": "ou cliquez pour parcourir"
   },
   "song": {
-    "comment_count": ""
+    "comment_count": "Aucun commentaire | 1 Commentaire | {count} Commentaires",
+    "comment_placeholder": "Votre commentaire ici...",
+    "submit": "Envoyer",
+    "sort_latest": "Récents",
+    "sort_oldest": "Anciens",
+    "commenting": "Veuillez patienter ! Votre commentaire est en cours d'envoi",
+    "comment_success": "Commentaire ajouté !"
+  },
+  "composition": {
+    "song_title_label": "Titre de la chanson",
+    "song_title_placeholder": "Entrez le titre",
+    "genre_label": "Genre",
+    "genre_placeholder": "Entrez le genre",
+    "cancel": "Annuler",
+    "save_changes": "Enregistrer",
+    "updating": "Veuillez patienter ! Mise à jour en cours.",
+    "update_success": "Succès !",
+    "update_error": "Une erreur s'est produite ! Réessayez plus tard"
+  },
+  "playlist": {
+    "your_playlists": "Vos Playlists",
+    "create": "Créer une Playlist",
+    "edit": "Modifier la Playlist",
+    "delete": "Supprimer la Playlist",
+    "add_song": "Ajouter à la Playlist",
+    "remove_song": "Retirer de la Playlist",
+    "empty": "Cette playlist est vide",
+    "empty_desc": "Ajoutez des chansons depuis la page d'accueil pour commencer.",
+    "no_playlists": "Vous n'avez pas encore créé de playlist",
+    "no_playlists_desc": "C'est facile ! Appuyez sur le bouton ci-dessous et commencez à ajouter vos chansons préférées.",
+    "create_first": "Créez votre première playlist",
+    "song_count": "Aucun morceau | 1 morceau | {count} morceaux",
+    "play_all": "Tout Lire",
+    "library": "Bibliothèque",
+    "label_playlist": "Playlist",
+    "loading": "Chargement...",
+    "name_label": "Nom de la Playlist",
+    "name_placeholder": "Ma Super Playlist",
+    "desc_label": "Description",
+    "desc_optional": "optionnel",
+    "desc_placeholder": "Ajoutez une description...",
+    "cover_color": "Couleur de couverture",
+    "create_new": "Créer une nouvelle playlist",
+    "add_to_playlist": "Ajouter à la Playlist",
+    "song_added": "Chanson ajoutée !",
+    "already_in_playlist": "La chanson est déjà dans cette playlist.",
+    "add_failed": "Échec de l'ajout. Réessayez."
+  },
+  "about": {
+    "heading": "Découvrez Vibe.",
+    "subtitle": "La plus belle façon de gérer, organiser et écouter votre collection musicale personnelle.",
+    "p1": "Vibe est un lecteur musical moderne et open-source, conçu pour la performance et la pureté esthétique. Propulsé par Vue 3, Vite et Appwrite.",
+    "p2": "Que vous téléchargiez une vaste bibliothèque ou que vous écoutiez quelques favoris, le moteur audio de Vibe garantit des transitions parfaites.",
+    "p3": "Le design est au cœur de tout ce que nous faisons. Nous avons éliminé la complexité pour ne garder que l'essentiel : votre musique.",
+    "start_listening": "Commencer à écouter"
+  },
+  "confirm": {
+    "cancel": "Annuler",
+    "logout_title": "Confirmer la déconnexion",
+    "logout_message": "Êtes-vous sûr de vouloir vous déconnecter ?",
+    "logout_btn": "Déconnexion"
   }
 }

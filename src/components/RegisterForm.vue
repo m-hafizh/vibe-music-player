@@ -6,32 +6,32 @@
     <vee-form :validation-schema="schema" @submit="register" :initial-values="userData" class="space-y-4">
       <!-- Name -->
       <div>
-        <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1.5">Full Name</label>
+        <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1.5">{{ $t('register.name_label') }}</label>
         <vee-field type="text" name="name"
           class="w-full px-4 py-2.5 bg-gray-50 dark:bg-gray-900 border border-gray-200 dark:border-gray-700 rounded-lg text-sm text-gray-900 dark:text-gray-100 focus:bg-white dark:focus:bg-gray-800 focus:border-green-500 focus:ring-2 focus:ring-green-500/20 outline-none transition-all placeholder-gray-400 dark:placeholder-gray-500"
-          placeholder="John Doe" />
+          :placeholder="$t('register.name_placeholder')" />
         <ErrorMessage class="text-red-500 dark:text-red-400 text-xs font-medium mt-1.5 block" name="name" />
       </div>
       <!-- Email -->
       <div>
-        <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1.5">Email address</label>
+        <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1.5">{{ $t('register.email_label') }}</label>
         <vee-field type="email" name="email"
           class="w-full px-4 py-2.5 bg-gray-50 dark:bg-gray-900 border border-gray-200 dark:border-gray-700 rounded-lg text-sm text-gray-900 dark:text-gray-100 focus:bg-white dark:focus:bg-gray-800 focus:border-green-500 focus:ring-2 focus:ring-green-500/20 outline-none transition-all placeholder-gray-400 dark:placeholder-gray-500"
-          placeholder="you@example.com" />
+          :placeholder="$t('register.email_placeholder')" />
         <ErrorMessage class="text-red-500 dark:text-red-400 text-xs font-medium mt-1.5 block" name="email" />
       </div>
       <!-- Age -->
       <div>
-        <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1.5">Age</label>
+        <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1.5">{{ $t('register.age_label') }}</label>
         <vee-field type="number" name="age"
           class="w-full px-4 py-2.5 bg-gray-50 dark:bg-gray-900 border border-gray-200 dark:border-gray-700 rounded-lg text-sm text-gray-900 dark:text-gray-100 focus:bg-white dark:focus:bg-gray-800 focus:border-green-500 focus:ring-2 focus:ring-green-500/20 outline-none transition-all placeholder-gray-400 dark:placeholder-gray-500"
-          placeholder="18" />
+          :placeholder="$t('register.age_placeholder')" />
         <ErrorMessage class="text-red-500 dark:text-red-400 text-xs font-medium mt-1.5 block" name="age" />
       </div>
       <!-- Password & Confirm -->
       <div class="grid grid-cols-2 gap-4">
         <div>
-          <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1.5">Password</label>
+          <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1.5">{{ $t('register.password_label') }}</label>
           <vee-field name="password" :bails="false" v-slot="{ field, errors }">
             <input type="password" v-bind="field" placeholder="••••••••"
               class="w-full px-4 py-2.5 bg-gray-50 dark:bg-gray-900 border border-gray-200 dark:border-gray-700 rounded-lg text-sm text-gray-900 dark:text-gray-100 focus:bg-white dark:focus:bg-gray-800 focus:border-green-500 focus:ring-2 focus:ring-green-500/20 outline-none transition-all placeholder-gray-400 dark:placeholder-gray-500" />
@@ -41,7 +41,7 @@
           </vee-field>
         </div>
         <div>
-          <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1.5">Confirm</label>
+          <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1.5">{{ $t('register.confirm_label') }}</label>
           <vee-field type="password" name="confirm_password"
             class="w-full px-4 py-2.5 bg-gray-50 dark:bg-gray-900 border border-gray-200 dark:border-gray-700 rounded-lg text-sm text-gray-900 dark:text-gray-100 focus:bg-white dark:focus:bg-gray-800 focus:border-green-500 focus:ring-2 focus:ring-green-500/20 outline-none transition-all placeholder-gray-400 dark:placeholder-gray-500"
             placeholder="••••••••" />
@@ -50,7 +50,7 @@
       </div>
       <!-- Country -->
       <div>
-        <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1.5">Country</label>
+        <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1.5">{{ $t('register.country_label') }}</label>
         <!-- Replaced generic <select> standard UI with dynamic styling -->
         <vee-field as="select" name="country"
           class="w-full px-4 py-2.5 bg-gray-50 dark:bg-gray-900 border border-gray-200 dark:border-gray-700 rounded-lg text-sm text-gray-900 dark:text-gray-100 focus:bg-white dark:focus:bg-gray-800 focus:border-green-500 focus:ring-2 focus:ring-green-500/20 outline-none transition-all appearance-none bg-no-repeat">
@@ -78,7 +78,7 @@
       <div class="pt-2">
         <button type="submit" :disabled="reg_in_submission"
           class="w-full bg-gray-900 dark:bg-white text-white dark:text-gray-900 py-3 rounded-full font-medium hover:bg-gray-800 dark:hover:bg-gray-200 transition-colors shadow-md hover:shadow-lg disabled:opacity-50 disabled:cursor-not-allowed">
-          Create Account
+          {{ $t('register.create_account') }}
         </button>
       </div>
     </vee-form>
@@ -88,8 +88,10 @@
 <script setup lang="ts">
 import { ref } from 'vue';
 import { useAuthStore } from '@/stores/auth';
+import { useI18n } from 'vue-i18n';
 
 const authStore = useAuthStore();
+const { t } = useI18n();
 
 const schema = {
   name: 'required|min:3|max:100|alpha_spaces',
@@ -108,13 +110,13 @@ const userData = {
 const reg_in_submission = ref(false);
 const reg_show_alert = ref(false);
 const reg_alert_variant = ref('bg-blue-50 text-blue-700');
-const reg_alert_msg = ref('Please wait! Your account is being created.');
+const reg_alert_msg = ref('');
 
 async function register(values: any) {
   reg_show_alert.value = true;
   reg_in_submission.value = true;
   reg_alert_variant.value = 'bg-blue-50 text-blue-700';
-  reg_alert_msg.value = 'Please wait! Your account is being created.';
+  reg_alert_msg.value = t('register.creating');
 
   try {
     await authStore.register(values);
@@ -122,12 +124,12 @@ async function register(values: any) {
     console.error('Appwrite Registration Error:', error);
     reg_in_submission.value = false;
     reg_alert_variant.value = 'bg-red-50 text-red-700';
-    reg_alert_msg.value = 'An unexpected error occured. Please try again later.';
+    reg_alert_msg.value = t('register.error');
     return;
   }
 
   reg_alert_variant.value = 'bg-green-50 text-green-700';
-  reg_alert_msg.value = 'Success! Your account has been created.';
+  reg_alert_msg.value = t('register.success');
   window.location.reload();
 }
 </script>

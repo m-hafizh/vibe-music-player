@@ -9,9 +9,9 @@
 
       <!-- Heading -->
       <div class="space-y-4">
-        <h1 class="text-4xl md:text-5xl font-extrabold text-gray-900 dark:text-white tracking-tight transition-colors duration-300">Meet Vibe.</h1>
+        <h1 class="text-4xl md:text-5xl font-extrabold text-gray-900 dark:text-white tracking-tight transition-colors duration-300">{{ $t('about.heading') }}</h1>
         <p class="text-xl text-gray-500 dark:text-gray-400 font-light max-w-xl mx-auto leading-relaxed transition-colors duration-300">
-          The most beautiful way to manage, organize, and listen to your personal music collection.
+          {{ $t('about.subtitle') }}
         </p>
       </div>
 
@@ -21,20 +21,20 @@
       <!-- Content -->
       <div class="text-left space-y-6 text-gray-600 dark:text-gray-300 text-lg leading-relaxed px-4 md:px-0 transition-colors duration-300">
         <p>
-          Vibe is an open-source, modern music player built from the ground up for performance and aesthetic purity. Powered by Vue 3, Vite, and Appwrite, it offers a seamless and highly responsive audio experience.
+          {{ $t('about.p1') }}
         </p>
         <p>
-          Whether you are uploading a vast library of genres or casually streaming a few favorites, Vibe's custom-built audio engine guarantees gapless transitions, intelligent network caching, and perfect sync across your devices.
+          {{ $t('about.p2') }}
         </p>
         <p>
-          Design is at the core of everything we do. We stripped away the bulky complexity of traditional media managers to leave behind exactly what matters: your music.
+          {{ $t('about.p3') }}
         </p>
       </div>
 
       <!-- Action Button -->
       <div class="pt-8">
         <router-link to="/" class="inline-flex items-center px-8 py-3 rounded-full bg-gray-900 dark:bg-white text-white dark:text-gray-900 font-medium hover:bg-gray-800 dark:hover:bg-gray-200 transition-all shadow-md hover:shadow-xl transform hover:-translate-y-0.5 duration-200">
-          <i class="fas fa-play-circle mr-2"></i> Start Listening
+          <i class="fas fa-play-circle mr-2"></i> {{ $t('about.start_listening') }}
         </router-link>
       </div>
       

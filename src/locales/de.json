@@ -1,0 +1,121 @@
+{
+  "nav": {
+    "about": "Über uns",
+    "library": "Bibliothek",
+    "manage": "Verwalten",
+    "login_register": "Anmelden / Registrieren",
+    "logout": "Abmelden"
+  },
+  "home": {
+    "listen": "Höre großartige Musik!",
+    "description": "Entdecke und genieße deine persönliche Musiksammlung. Lade deine Lieblingstitel hoch, organisiere und streame sie."
+  },
+  "songs": {
+    "title": "Lieder",
+    "search_placeholder": "Lieder nach Titel suchen..."
+  },
+  "manage": {
+    "my_songs": "Meine Lieder"
+  },
+  "auth": {
+    "welcome": "Willkommen",
+    "login_tab": "Anmelden",
+    "register_tab": "Registrieren"
+  },
+  "login": {
+    "email_label": "E-Mail-Adresse",
+    "email_placeholder": "du{'@'}beispiel.de",
+    "password_label": "Passwort",
+    "password_placeholder": "••••••••",
+    "sign_in": "Anmelden",
+    "logging_in": "Bitte warten! Du wirst angemeldet.",
+    "success": "Erfolgreich! Du bist jetzt angemeldet.",
+    "error": "Ungültige Anmeldedaten."
+  },
+  "register": {
+    "name_label": "Vollständiger Name",
+    "name_placeholder": "Max Mustermann",
+    "email_label": "E-Mail-Adresse",
+    "email_placeholder": "du{'@'}beispiel.de",
+    "age_label": "Alter",
+    "age_placeholder": "18",
+    "password_label": "Passwort",
+    "confirm_label": "Bestätigen",
+    "password_placeholder": "••••••••",
+    "country_label": "Land",
+    "create_account": "Konto erstellen",
+    "creating": "Bitte warten! Dein Konto wird erstellt.",
+    "success": "Erfolg! Dein Konto wurde erstellt.",
+    "error": "Ein unerwarteter Fehler ist aufgetreten. Bitte versuche es später erneut.",
+    "TOS": "Nutzungsbedingungen",
+    "accept": "Ich akzeptiere die {0} von Music"
+  },
+  "upload": {
+    "title": "Hochladen",
+    "drop_files": "Dateien hier ablegen",
+    "or_click": "oder klicken zum Durchsuchen"
+  },
+  "song": {
+    "comment_count": "Keine Kommentare | 1 Kommentar | {count} Kommentare",
+    "comment_placeholder": "Dein Kommentar hier...",
+    "submit": "Absenden",
+    "sort_latest": "Neueste",
+    "sort_oldest": "Älteste",
+    "commenting": "Bitte warten! Dein Kommentar wird gesendet",
+    "comment_success": "Kommentar hinzugefügt!"
+  },
+  "composition": {
+    "song_title_label": "Liedtitel",
+    "song_title_placeholder": "Liedtitel eingeben",
+    "genre_label": "Genre",
+    "genre_placeholder": "Genre eingeben",
+    "cancel": "Abbrechen",
+    "save_changes": "Speichern",
+    "updating": "Bitte warten! Lied-Infos werden aktualisiert.",
+    "update_success": "Erfolg!",
+    "update_error": "Etwas ist schiefgelaufen! Versuche es später erneut"
+  },
+  "playlist": {
+    "your_playlists": "Deine Playlists",
+    "create": "Playlist erstellen",
+    "edit": "Playlist bearbeiten",
+    "delete": "Playlist löschen",
+    "add_song": "Zur Playlist hinzufügen",
+    "remove_song": "Aus Playlist entfernen",
+    "empty": "Diese Playlist ist leer",
+    "empty_desc": "Füge Lieder von der Startseite hinzu.",
+    "no_playlists": "Du hast noch keine Playlists erstellt",
+    "no_playlists_desc": "Ganz einfach! Tippe auf den Button und füge deine Lieblingslieder hinzu.",
+    "create_first": "Erstelle deine erste Playlist",
+    "song_count": "Keine Lieder | 1 Lied | {count} Lieder",
+    "play_all": "Alle abspielen",
+    "library": "Bibliothek",
+    "label_playlist": "Playlist",
+    "loading": "Laden...",
+    "name_label": "Playlist-Name",
+    "name_placeholder": "Meine Playlist",
+    "desc_label": "Beschreibung",
+    "desc_optional": "optional",
+    "desc_placeholder": "Beschreibung hinzufügen...",
+    "cover_color": "Coverfarbe",
+    "create_new": "Neue Playlist erstellen",
+    "add_to_playlist": "Zur Playlist hinzufügen",
+    "song_added": "Lied hinzugefügt!",
+    "already_in_playlist": "Das Lied ist bereits in dieser Playlist.",
+    "add_failed": "Hinzufügen fehlgeschlagen. Erneut versuchen."
+  },
+  "about": {
+    "heading": "Entdecke Vibe.",
+    "subtitle": "Die schönste Art, deine persönliche Musiksammlung zu verwalten, organisieren und anzuhören.",
+    "p1": "Vibe ist ein moderner, quelloffener Musikplayer, der für Leistung und ästhetische Reinheit entwickelt wurde. Angetrieben von Vue 3, Vite und Appwrite.",
+    "p2": "Ob du eine große Bibliothek hochlädst oder ein paar Favoriten streamst – Vibes Audio-Engine garantiert nahtlose Übergänge.",
+    "p3": "Design steht im Mittelpunkt. Wir haben die Komplexität entfernt und nur das Wesentliche beibehalten: deine Musik.",
+    "start_listening": "Jetzt anhören"
+  },
+  "confirm": {
+    "cancel": "Abbrechen",
+    "logout_title": "Abmelden bestätigen",
+    "logout_message": "Bist du sicher, dass du dich abmelden möchtest?",
+    "logout_btn": "Abmelden"
+  }
+}

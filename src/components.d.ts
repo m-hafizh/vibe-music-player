@@ -7,18 +7,24 @@ export {}
 /* prettier-ignore */
 declare module 'vue' {
   export interface GlobalComponents {
+    AddToPlaylistModal: typeof import('./components/AddToPlaylistModal.vue')['default']
     Auth: typeof import('./components/Auth.vue')['default']
     Button: typeof import('./components/base/Button.vue')['default']
     CompositionItem: typeof import('./components/CompositionItem.vue')['default']
     ConfirmModal: typeof import('./components/ConfirmModal.vue')['default']
+    CreatePlaylistModal: typeof import('./components/CreatePlaylistModal.vue')['default']
     Header: typeof import('./components/Header.vue')['default']
     HelloI18n: typeof import('./components/HelloI18n.vue')['default']
     LoginForm: typeof import('./components/LoginForm.vue')['default']
     Player: typeof import('./components/Player.vue')['default']
+    PlaylistCard: typeof import('./components/PlaylistCard.vue')['default']
+    PlaylistGrid: typeof import('./components/PlaylistGrid.vue')['default']
+    PlaylistSongItem: typeof import('./components/PlaylistSongItem.vue')['default']
     RegisterForm: typeof import('./components/RegisterForm.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
     SongItem: typeof import('./components/SongItem.vue')['default']
+    ToastContainer: typeof import('./components/ToastContainer.vue')['default']
     Upload: typeof import('./components/Upload.vue')['default']
   }
 }

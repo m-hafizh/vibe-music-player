@@ -1,0 +1,121 @@
+{
+  "nav": {
+    "about": "Over",
+    "library": "Bibliotheek",
+    "manage": "Beheren",
+    "login_register": "Inloggen / Registreren",
+    "logout": "Uitloggen"
+  },
+  "home": {
+    "listen": "Luister naar geweldige muziek!",
+    "description": "Ontdek en geniet van je persoonlijke muziekcollectie. Upload, organiseer en stream je favoriete nummers."
+  },
+  "songs": {
+    "title": "Nummers",
+    "search_placeholder": "Zoek nummers op titel..."
+  },
+  "manage": {
+    "my_songs": "Mijn Nummers"
+  },
+  "auth": {
+    "welcome": "Welkom",
+    "login_tab": "Inloggen",
+    "register_tab": "Registreren"
+  },
+  "login": {
+    "email_label": "E-mailadres",
+    "email_placeholder": "jij{'@'}voorbeeld.nl",
+    "password_label": "Wachtwoord",
+    "password_placeholder": "••••••••",
+    "sign_in": "Inloggen",
+    "logging_in": "Even geduld! We loggen je in.",
+    "success": "Gelukt! Je bent nu ingelogd.",
+    "error": "Ongeldige inloggegevens."
+  },
+  "register": {
+    "name_label": "Volledige naam",
+    "name_placeholder": "Jan Jansen",
+    "email_label": "E-mailadres",
+    "email_placeholder": "jij{'@'}voorbeeld.nl",
+    "age_label": "Leeftijd",
+    "age_placeholder": "18",
+    "password_label": "Wachtwoord",
+    "confirm_label": "Bevestigen",
+    "password_placeholder": "••••••••",
+    "country_label": "Land",
+    "create_account": "Account aanmaken",
+    "creating": "Even geduld! Je account wordt aangemaakt.",
+    "success": "Gelukt! Je account is aangemaakt.",
+    "error": "Er is een onverwachte fout opgetreden. Probeer het later opnieuw.",
+    "TOS": "Gebruiksvoorwaarden",
+    "accept": "Ik accepteer de {0} van Music"
+  },
+  "upload": {
+    "title": "Uploaden",
+    "drop_files": "Sleep je bestanden hierheen",
+    "or_click": "of klik om te bladeren"
+  },
+  "song": {
+    "comment_count": "Geen reacties | 1 Reactie | {count} Reacties",
+    "comment_placeholder": "Jouw reactie hier...",
+    "submit": "Versturen",
+    "sort_latest": "Nieuwste",
+    "sort_oldest": "Oudste",
+    "commenting": "Even geduld! Je reactie wordt verstuurd",
+    "comment_success": "Reactie toegevoegd!"
+  },
+  "composition": {
+    "song_title_label": "Titel",
+    "song_title_placeholder": "Voer titel in",
+    "genre_label": "Genre",
+    "genre_placeholder": "Voer genre in",
+    "cancel": "Annuleren",
+    "save_changes": "Opslaan",
+    "updating": "Even geduld! Nummerinfo wordt bijgewerkt.",
+    "update_success": "Gelukt!",
+    "update_error": "Er ging iets fout! Probeer het later opnieuw"
+  },
+  "playlist": {
+    "your_playlists": "Jouw Playlists",
+    "create": "Playlist aanmaken",
+    "edit": "Playlist bewerken",
+    "delete": "Playlist verwijderen",
+    "add_song": "Toevoegen aan Playlist",
+    "remove_song": "Verwijderen uit Playlist",
+    "empty": "Deze playlist is leeg",
+    "empty_desc": "Voeg nummers toe vanaf de startpagina.",
+    "no_playlists": "Je hebt nog geen playlists aangemaakt",
+    "no_playlists_desc": "Heel eenvoudig! Tik op de knop en voeg je favoriete nummers toe.",
+    "create_first": "Maak je eerste playlist",
+    "song_count": "Geen nummers | 1 nummer | {count} nummers",
+    "play_all": "Alles afspelen",
+    "library": "Bibliotheek",
+    "label_playlist": "Playlist",
+    "loading": "Laden...",
+    "name_label": "Playlistnaam",
+    "name_placeholder": "Mijn Playlist",
+    "desc_label": "Beschrijving",
+    "desc_optional": "optioneel",
+    "desc_placeholder": "Voeg een beschrijving toe...",
+    "cover_color": "Omslagkleur",
+    "create_new": "Nieuwe playlist aanmaken",
+    "add_to_playlist": "Toevoegen aan Playlist",
+    "song_added": "Nummer toegevoegd!",
+    "already_in_playlist": "Dit nummer staat al in deze playlist.",
+    "add_failed": "Toevoegen mislukt. Probeer opnieuw."
+  },
+  "about": {
+    "heading": "Ontdek Vibe.",
+    "subtitle": "De mooiste manier om je persoonlijke muziekcollectie te beheren, organiseren en beluisteren.",
+    "p1": "Vibe is een moderne, open-source muziekspeler gebouwd voor prestaties en esthetische zuiverheid. Aangedreven door Vue 3, Vite en Appwrite.",
+    "p2": "Of je nu een grote bibliotheek uploadt of een paar favorieten streamt, Vibe's audio-engine garandeert naadloze overgangen.",
+    "p3": "Design staat centraal. We hebben de complexiteit verwijderd en alleen het essentiële behouden: jouw muziek.",
+    "start_listening": "Begin met luisteren"
+  },
+  "confirm": {
+    "cancel": "Annuleren",
+    "logout_title": "Uitloggen bevestigen",
+    "logout_message": "Weet je zeker dat je wilt uitloggen?",
+    "logout_btn": "Uitloggen"
+  }
+}

@@ -1,0 +1,121 @@
+{
+  "nav": {
+    "about": "について",
+    "library": "ライブラリ",
+    "manage": "管理",
+    "login_register": "ログイン / 登録",
+    "logout": "ログアウト"
+  },
+  "home": {
+    "listen": "素晴らしい音楽を聴こう！",
+    "description": "あなたの音楽コレクションを発見し、楽しみましょう。お気に入りの曲をアップロード、整理、ストリーミング。"
+  },
+  "songs": {
+    "title": "曲",
+    "search_placeholder": "タイトルで曲を検索..."
+  },
+  "manage": {
+    "my_songs": "マイソング"
+  },
+  "auth": {
+    "welcome": "ようこそ",
+    "login_tab": "ログイン",
+    "register_tab": "登録"
+  },
+  "login": {
+    "email_label": "メールアドレス",
+    "email_placeholder": "you{'@'}example.com",
+    "password_label": "パスワード",
+    "password_placeholder": "••••••••",
+    "sign_in": "サインイン",
+    "logging_in": "ログイン中です。しばらくお待ちください。",
+    "success": "ログインしました！",
+    "error": "ログイン情報が無効です。"
+  },
+  "register": {
+    "name_label": "氏名",
+    "name_placeholder": "山田太郎",
+    "email_label": "メールアドレス",
+    "email_placeholder": "you{'@'}example.com",
+    "age_label": "年齢",
+    "age_placeholder": "18",
+    "password_label": "パスワード",
+    "confirm_label": "確認",
+    "password_placeholder": "••••••••",
+    "country_label": "国",
+    "create_account": "アカウント作成",
+    "creating": "アカウントを作成中です。しばらくお待ちください。",
+    "success": "アカウントが作成されました！",
+    "error": "予期しないエラーが発生しました。後でもう一度お試しください。",
+    "TOS": "利用規約",
+    "accept": "Musicの{0}に同意します"
+  },
+  "upload": {
+    "title": "アップロード",
+    "drop_files": "ここにファイルをドロップ",
+    "or_click": "またはクリックして選択"
+  },
+  "song": {
+    "comment_count": "コメントなし | 1件のコメント | {count}件のコメント",
+    "comment_placeholder": "コメントを入力...",
+    "submit": "送信",
+    "sort_latest": "最新",
+    "sort_oldest": "最古",
+    "commenting": "コメントを送信中です。しばらくお待ちください",
+    "comment_success": "コメントが追加されました！"
+  },
+  "composition": {
+    "song_title_label": "曲名",
+    "song_title_placeholder": "曲名を入力",
+    "genre_label": "ジャンル",
+    "genre_placeholder": "ジャンルを入力",
+    "cancel": "キャンセル",
+    "save_changes": "保存",
+    "updating": "曲情報を更新中です。しばらくお待ちください。",
+    "update_success": "成功！",
+    "update_error": "エラーが発生しました！後でもう一度お試しください"
+  },
+  "playlist": {
+    "your_playlists": "あなたのプレイリスト",
+    "create": "プレイリスト作成",
+    "edit": "プレイリスト編集",
+    "delete": "プレイリスト削除",
+    "add_song": "プレイリストに追加",
+    "remove_song": "プレイリストから削除",
+    "empty": "このプレイリストは空です",
+    "empty_desc": "ホームページから曲を追加して始めましょう。",
+    "no_playlists": "まだプレイリストがありません",
+    "no_playlists_desc": "簡単です！下のボタンをタップして、お気に入りの曲を追加しましょう。",
+    "create_first": "最初のプレイリストを作成",
+    "song_count": "曲なし | 1曲 | {count}曲",
+    "play_all": "すべて再生",
+    "library": "ライブラリ",
+    "label_playlist": "プレイリスト",
+    "loading": "読み込み中...",
+    "name_label": "プレイリスト名",
+    "name_placeholder": "マイプレイリスト",
+    "desc_label": "説明",
+    "desc_optional": "任意",
+    "desc_placeholder": "説明を追加...",
+    "cover_color": "カバーカラー",
+    "create_new": "新しいプレイリストを作成",
+    "add_to_playlist": "プレイリストに追加",
+    "song_added": "曲が追加されました！",
+    "already_in_playlist": "この曲はすでにプレイリストにあります。",
+    "add_failed": "追加に失敗しました。もう一度お試しください。"
+  },
+  "about": {
+    "heading": "Vibeとは",
+    "subtitle": "あなたの音楽コレクションを管理、整理、視聴するための最も美しい方法。",
+    "p1": "Vibeはパフォーマンスと美しさのために一から構築された、モダンでオープンソースの音楽プレーヤーです。Vue 3、Vite、Appwriteで動作します。",
+    "p2": "膨大なライブラリをアップロードする場合でも、お気に入りをストリーミングする場合でも、Vibeのオーディオエンジンが完璧なトランジションを保証します。",
+    "p3": "デザインは私たちのすべての核心です。本当に大切なもの、つまりあなたの音楽だけを残しました。",
+    "start_listening": "聴き始める"
+  },
+  "confirm": {
+    "cancel": "キャンセル",
+    "logout_title": "ログアウトの確認",
+    "logout_message": "アカウントからログアウトしますか？",
+    "logout_btn": "ログアウト"
+  }
+}

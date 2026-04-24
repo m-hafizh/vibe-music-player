@@ -1,0 +1,121 @@
+{
+  "nav": {
+    "about": "关于",
+    "library": "音乐库",
+    "manage": "管理",
+    "login_register": "登录 / 注册",
+    "logout": "退出"
+  },
+  "home": {
+    "listen": "聆听美妙音乐！",
+    "description": "发现并享受您的个人音乐收藏。上传、整理和播放您最喜爱的曲目。"
+  },
+  "songs": {
+    "title": "歌曲",
+    "search_placeholder": "按标题搜索歌曲..."
+  },
+  "manage": {
+    "my_songs": "我的歌曲"
+  },
+  "auth": {
+    "welcome": "欢迎",
+    "login_tab": "登录",
+    "register_tab": "注册"
+  },
+  "login": {
+    "email_label": "电子邮箱",
+    "email_placeholder": "you{'@'}example.com",
+    "password_label": "密码",
+    "password_placeholder": "••••••••",
+    "sign_in": "登录",
+    "logging_in": "请稍候！正在登录。",
+    "success": "成功！您已登录。",
+    "error": "登录信息无效。"
+  },
+  "register": {
+    "name_label": "姓名",
+    "name_placeholder": "张三",
+    "email_label": "电子邮箱",
+    "email_placeholder": "you{'@'}example.com",
+    "age_label": "年龄",
+    "age_placeholder": "18",
+    "password_label": "密码",
+    "confirm_label": "确认密码",
+    "password_placeholder": "••••••••",
+    "country_label": "国家",
+    "create_account": "创建账户",
+    "creating": "请稍候！正在创建您的账户。",
+    "success": "成功！您的账户已创建。",
+    "error": "发生意外错误，请稍后重试。",
+    "TOS": "服务条款",
+    "accept": "我接受 Music 的{0}"
+  },
+  "upload": {
+    "title": "上传",
+    "drop_files": "将文件拖放到此处",
+    "or_click": "或点击浏览"
+  },
+  "song": {
+    "comment_count": "暂无评论 | 1 条评论 | {count} 条评论",
+    "comment_placeholder": "在此输入评论...",
+    "submit": "提交",
+    "sort_latest": "最新",
+    "sort_oldest": "最早",
+    "commenting": "请稍候！正在提交您的评论",
+    "comment_success": "评论已添加！"
+  },
+  "composition": {
+    "song_title_label": "歌曲标题",
+    "song_title_placeholder": "输入歌曲标题",
+    "genre_label": "风格",
+    "genre_placeholder": "输入风格",
+    "cancel": "取消",
+    "save_changes": "保存",
+    "updating": "请稍候！正在更新歌曲信息。",
+    "update_success": "成功！",
+    "update_error": "出了点问题！请稍后重试"
+  },
+  "playlist": {
+    "your_playlists": "我的播放列表",
+    "create": "创建播放列表",
+    "edit": "编辑播放列表",
+    "delete": "删除播放列表",
+    "add_song": "添加到播放列表",
+    "remove_song": "从播放列表移除",
+    "empty": "此播放列表为空",
+    "empty_desc": "从首页添加歌曲开始吧。",
+    "no_playlists": "您还没有创建播放列表",
+    "no_playlists_desc": "很简单！点击下方按钮，开始添加您喜爱的歌曲。",
+    "create_first": "创建您的第一个播放列表",
+    "song_count": "没有歌曲 | 1 首歌曲 | {count} 首歌曲",
+    "play_all": "全部播放",
+    "library": "音乐库",
+    "label_playlist": "播放列表",
+    "loading": "加载中...",
+    "name_label": "播放列表名称",
+    "name_placeholder": "我的播放列表",
+    "desc_label": "描述",
+    "desc_optional": "可选",
+    "desc_placeholder": "添加描述...",
+    "cover_color": "封面颜色",
+    "create_new": "创建新播放列表",
+    "add_to_playlist": "添加到播放列表",
+    "song_added": "歌曲已添加！",
+    "already_in_playlist": "这首歌已在此播放列表中。",
+    "add_failed": "添加失败，请重试。"
+  },
+  "about": {
+    "heading": "认识 Vibe",
+    "subtitle": "管理、整理和聆听您个人音乐收藏的最佳方式。",
+    "p1": "Vibe 是一款现代化的开源音乐播放器，专为性能和美学而打造。由 Vue 3、Vite 和 Appwrite 驱动。",
+    "p2": "无论是上传庞大的音乐库还是随意播放几首喜爱的歌曲，Vibe 的音频引擎都能保证完美的过渡。",
+    "p3": "设计是我们一切的核心。我们去除了复杂性，只留下真正重要的：您的音乐。",
+    "start_listening": "开始聆听"
+  },
+  "confirm": {
+    "cancel": "取消",
+    "logout_title": "确认退出",
+    "logout_message": "您确定要退出登录吗？",
+    "logout_btn": "退出"
+  }
+}

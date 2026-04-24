@@ -1,27 +1,26 @@
 <template>
   <main>
     <!-- Music Header -->
-    <section class="w-full mb-8 py-14 text-center text-white relative">
-      <div class="absolute inset-0 w-full h-full box-border bg-contain music-bg"
+    <section class="w-full mb-8 py-10 sm:py-14 text-center text-white relative">
+      <div class="absolute inset-0 w-full h-full box-border border-none music-bg bg-cover bg-center"
         style="background-image: url(/assets/img/song-header.png)">
       </div>
-      <div class="container mx-auto flex items-center">
+      <div class="container mx-auto flex flex-col sm:flex-row items-center px-4 lg:px-0 relative z-10">
         <!-- Play/Pause Button -->
-        <button type="button" class="z-50 h-24 w-24 text-3xl bg-white text-black rounded-full
-          focus:outline-none" @click.prevent="newSong(song)" id="play-button">
-          <i class="fas fa-play"></i>
+        <button type="button" class="h-16 w-16 sm:h-24 sm:w-24 text-xl sm:text-3xl bg-white text-black rounded-full shadow-lg
+          focus:outline-none shrink-0 mb-4 sm:mb-0" @click.prevent="newSong(song)" id="play-button">
+          <i class="fas fa-play ml-1"></i>
         </button>
-        <div class="z-50 text-left ml-8">
+        <div class="text-center sm:text-left sm:ml-8 w-full max-w-full overflow-hidden">
           <!-- Song Info -->
-          <div class="text-3xl font-bold">{{ song.modified_name }}</div>
-          <div>{{ song.genre }}</div>
-          <div class="song-price">{{ $n(1, 'currency', 'ja') }} </div>
+          <div class="text-2xl sm:text-3xl font-bold truncate leading-tight mb-1">{{ song.modified_name }}</div>
+          <div class="text-sm sm:text-base opacity-90">{{ song.genre }}</div>
         </div>
       </div>
     </section>
     <!-- Form -->
-    <section class="container mx-auto mt-6" id="comments">
-      <div class="bg-white dark:bg-gray-800 rounded border border-gray-200 dark:border-gray-700 relative flex flex-col shadow-sm transition-colors duration-300">
+    <section class="container mx-auto px-4 lg:px-0 mt-6 mb-8" id="comments">
+      <div class="bg-white dark:bg-gray-800 rounded border border-gray-200 dark:border-gray-700 relative flex flex-col shadow-md dark:shadow-none transition-colors duration-300">
         <div class="px-6 pt-6 pb-5 font-bold border-b border-gray-200 dark:border-gray-700 flex justify-between items-center transition-colors duration-300">
           <!-- Comment Count -->
           <span class="card-title text-xl text-gray-800 dark:text-gray-100 transition-colors">
@@ -41,32 +40,32 @@
             <vee-field as="textarea" name="comment"
               class="block w-full py-2 px-4 text-gray-800 dark:text-gray-100 bg-white dark:bg-gray-700 border border-gray-300 dark:border-gray-600 transition-colors
                 duration-300 focus:outline-none focus:border-green-500 focus:ring-1 focus:ring-green-500 rounded-lg mb-4 resize-none"
-              placeholder="Your comment here..." rows="3"></vee-field>
+              :placeholder="$t('song.comment_placeholder')" rows="3"></vee-field>
             <ErrorMessage class="text-red-600 dark:text-red-400 text-sm font-medium block mb-3" name="comment" />
             <button type="submit" class="py-2 px-6 rounded-full text-white font-medium bg-green-600 hover:bg-green-700 shadow-sm transition-colors duration-300 disabled:opacity-50"
               :disabled="comment_in_submission">
-              Submit
+              {{ $t('song.submit') }}
             </button>
           </vee-form>
           <!-- Comment Sorting -->
           <select v-model="sort"
             class="block mt-6 py-2 px-4 w-32 border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-700 dark:text-gray-200 transition-colors
             duration-300 focus:outline-none focus:border-green-500 focus:ring-1 focus:ring-green-500 rounded-lg cursor-pointer">
-            <option value="1">Latest</option>
-            <option value="2">Oldest</option>
+            <option value="1">{{ $t('song.sort_latest') }}</option>
+            <option value="2">{{ $t('song.sort_oldest') }}</option>
           </select>
         </div>
       </div>
     </section>
     <!-- Comments -->
-    <ul class="container mx-auto space-y-4 mb-10 pt-6">
+    <ul class="container mx-auto px-4 lg:px-0 space-y-4 mb-16 sm:mb-24 pt-6">
       <li class="p-6 bg-white dark:bg-gray-800 border border-gray-100 dark:border-gray-700 shadow-sm rounded-xl transition-colors duration-300" 
         v-for="comment in sortedComments"
         :key="comment.docID">
         <!-- Comment Author -->
-        <div class="mb-3 flex justify-between items-center border-b border-gray-100 dark:border-gray-700 pb-3 transition-colors duration-300">
+        <div class="mb-3 flex flex-col sm:flex-row sm:justify-between sm:items-center border-b border-gray-100 dark:border-gray-700 pb-3 transition-colors duration-300">
           <div class="font-bold text-gray-900 dark:text-gray-100 transition-colors">{{ comment.name }}</div>
-          <time class="text-sm text-gray-500 dark:text-gray-400 font-medium transition-colors">{{ comment.datePosted }}</time>
+          <time class="text-sm text-gray-500 dark:text-gray-400 font-medium transition-colors mt-1 sm:mt-0">{{ formatDate(comment.datePosted) }}</time>
         </div>
 
         <p class="text-gray-700 dark:text-gray-300 leading-relaxed transition-colors">{{ comment.content }}</p>
@@ -82,6 +81,9 @@ import { useAuthStore } from '@/stores/auth';
 import { usePlayerStore } from '@/stores/player';
 import { databases, databaseId, songsCollectionId, commentsCollectionId, account } from '@/includes/appwrite';
 import { Query, ID } from 'appwrite';
+import { useI18n } from 'vue-i18n';
+
+const { t } = useI18n();
 
 const route = useRoute();
 const router = useRouter();
@@ -95,7 +97,7 @@ const schema = {
 const comment_in_submission = ref(false);
 const comment_show_alert = ref(false);
 const comment_alert_variant = ref('bg-blue-500');
-const comment_alert_message = ref('Please wait! Your comment is being submitted');
+const comment_alert_message = ref('');
 const comments = ref<any[]>([]);
 const sort = ref('1');
 
@@ -126,7 +128,7 @@ async function addComment(values: any, { resetForm }: any) {
   comment_in_submission.value = true;
   comment_show_alert.value = true;
   comment_alert_variant.value = 'bg-blue-500';
-  comment_alert_message.value = 'Please wait! Your comment is being submitted';
+  comment_alert_message.value = t('song.commenting');
 
   const user = await account.get();
   const comment = {
@@ -148,13 +150,26 @@ async function addComment(values: any, { resetForm }: any) {
 
   comment_in_submission.value = false;
   comment_alert_variant.value = 'bg-green-500';
-  comment_alert_message.value = 'Comment added!';
+  comment_alert_message.value = t('song.comment_success');
 
   resetForm();
 }
 
 function newSong(songData: any) {
   playerStore.newSong(songData);
+}
+
+function formatDate(dateString: string) {
+  const date = new Date(dateString);
+  if (isNaN(date.getTime())) return dateString;
+  
+  return new Intl.DateTimeFormat('en-US', {
+    year: 'numeric',
+    month: 'short',
+    day: 'numeric',
+    hour: 'numeric',
+    minute: '2-digit'
+  }).format(date);
 }
 
 onMounted(async () => {

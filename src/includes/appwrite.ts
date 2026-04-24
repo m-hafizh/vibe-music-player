@@ -16,6 +16,8 @@ const usersCollectionId: string = import.meta.env.VITE_APPWRITE_USERS_COLLECTION
 const songsCollectionId: string = import.meta.env.VITE_APPWRITE_SONGS_COLLECTION_ID
 const commentsCollectionId: string = import.meta.env.VITE_APPWRITE_COMMENTS_COLLECTION_ID
 const storageBucketId: string = import.meta.env.VITE_APPWRITE_BUCKET_ID
+const playlistsCollectionId: string = import.meta.env.VITE_APPWRITE_PLAYLISTS_COLLECTION_ID
+const playlistSongsCollectionId: string = import.meta.env.VITE_APPWRITE_PLAYLIST_SONGS_COLLECTION_ID
 
 export {
   client,
@@ -27,6 +29,8 @@ export {
   songsCollectionId,
   commentsCollectionId,
   storageBucketId,
+  playlistsCollectionId,
+  playlistSongsCollectionId,
   Query,
   ID,
   Permission,

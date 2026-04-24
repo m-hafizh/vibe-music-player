@@ -1,7 +1,7 @@
 <template>
-  <div class="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-100 dark:border-gray-700 flex flex-col transition-colors duration-300">
+  <div class="bg-white dark:bg-gray-800 rounded-xl shadow-md dark:shadow-none border border-gray-100 dark:border-gray-700 flex flex-col transition-colors duration-300">
     <div class="px-6 py-5 border-b border-gray-100 dark:border-gray-700 flex justify-between items-center transition-colors duration-300">
-      <span class="font-bold text-xl text-gray-800 dark:text-white">Upload</span>
+      <span class="font-bold text-xl text-gray-800 dark:text-white">{{ $t('upload.title') }}</span>
       <div class="w-10 h-10 rounded-full bg-blue-50 dark:bg-gray-700 flex items-center justify-center text-blue-500 dark:text-blue-400 transition-colors duration-300">
         <i class="fas fa-upload text-xl"></i>
       </div>
@@ -25,8 +25,8 @@
           :class="is_dragover ? 'bg-green-100 dark:bg-gray-600 text-green-600 dark:text-green-400' : 'bg-white dark:bg-gray-700 text-gray-400 dark:text-gray-300 group-hover:text-blue-500 dark:group-hover:text-blue-400 shadow-sm'">
           <i class="fas fa-cloud-upload-alt text-3xl"></i>
         </div>
-        <h5 class="text-lg font-semibold transition-colors duration-300" :class="is_dragover ? 'text-green-700 dark:text-green-300' : 'text-gray-700 dark:text-gray-200'">Drop your files here</h5>
-        <p class="text-sm mt-1 transition-colors duration-300" :class="is_dragover ? 'text-green-600 dark:text-green-400' : 'text-gray-500 dark:text-gray-400'">or click to browse</p>
+        <h5 class="text-lg font-semibold transition-colors duration-300" :class="is_dragover ? 'text-green-700 dark:text-green-300' : 'text-gray-700 dark:text-gray-200'">{{ $t('upload.drop_files') }}</h5>
+        <p class="text-sm mt-1 transition-colors duration-300" :class="is_dragover ? 'text-green-600 dark:text-green-400' : 'text-gray-500 dark:text-gray-400'">{{ $t('upload.or_click') }}</p>
       </div>
       <input type="file" multiple @change="handleFileDrop($event)" class="hidden" ref="fileInput" />
       
@@ -65,6 +65,7 @@ import ConfirmModal from '@/components/ConfirmModal.vue';
 import {
   storage, databases, databaseId, songsCollectionId, storageBucketId, account, ID,
 } from '@/includes/appwrite';
+import { useToastStore } from '@/stores/toast';
 
 export default {
   name: 'Upload',
@@ -88,6 +89,7 @@ export default {
   },
   methods: {
     handleFileDrop($event) {
+      const toastStore = useToastStore();
       this.is_dragover = false;
 
       const files = $event.dataTransfer
@@ -99,6 +101,9 @@ export default {
 
       if (validFiles.length === 0) {
         if (files.length > 0) alert('Please select a valid MP3 file.');
+        if (files.length > 0) {
+          toastStore.showToast('Please select a valid MP3 file.', 'warning');
+        }
         return;
       }
 
@@ -114,6 +119,7 @@ export default {
       this.pendingFiles = [];
     },
     confirmUpload() {
+      const toastStore = useToastStore();
       this.showUploadModal = false;
       const filesToUpload = this.pendingFiles;
       this.pendingFiles = [];
@@ -128,6 +134,7 @@ export default {
             icon: 'fas fa-times-circle',
             text_class: 'text-red-500',
           });
+          toastStore.showToast(`You're offline. Failed to upload ${file.name}.`, 'error');
           return;
         }
 
@@ -186,11 +193,13 @@ export default {
             this.uploads[uploadIndex].variant = 'bg-green-500';
             this.uploads[uploadIndex].icon = 'fas fa-check-circle';
             this.uploads[uploadIndex].text_class = 'text-green-600';
+            toastStore.showToast(`Uploaded ${file.name} successfully.`, 'success');
           } catch (error) {
             console.error('Appwrite Upload Error:', error);
             this.uploads[uploadIndex].variant = 'bg-red-500';
             this.uploads[uploadIndex].icon = 'fas fa-times-circle';
             this.uploads[uploadIndex].text_class = 'text-red-500';
+            toastStore.showToast(`Failed to upload ${file.name}.`, 'error');
           }
         };
 

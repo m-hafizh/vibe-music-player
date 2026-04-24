@@ -1,15 +1,121 @@
 {
+  "nav": {
+    "about": "About",
+    "library": "Library",
+    "manage": "Manage",
+    "login_register": "Login / Register",
+    "logout": "Logout"
+  },
   "home": {
-    "listen": "Listen to Great Music!"
+    "listen": "Listen to Great Music!",
+    "description": "Discover and enjoy your personal music collection. Upload, organize, and stream your favorite tracks with a beautiful, modern experience."
+  },
+  "songs": {
+    "title": "Songs",
+    "search_placeholder": "Search songs by title..."
   },
   "manage": {
     "my_songs": "My Songs"
   },
+  "auth": {
+    "welcome": "Welcome",
+    "login_tab": "Login",
+    "register_tab": "Register"
+  },
+  "login": {
+    "email_label": "Email address",
+    "email_placeholder": "you{'@'}example.com",
+    "password_label": "Password",
+    "password_placeholder": "••••••••",
+    "sign_in": "Sign in",
+    "logging_in": "Please wait! We are logging you in.",
+    "success": "Success! You are now logged in.",
+    "error": "Invalid login details."
+  },
   "register": {
+    "name_label": "Full Name",
+    "name_placeholder": "John Doe",
+    "email_label": "Email address",
+    "email_placeholder": "you{'@'}example.com",
+    "age_label": "Age",
+    "age_placeholder": "18",
+    "password_label": "Password",
+    "confirm_label": "Confirm",
+    "password_placeholder": "••••••••",
+    "country_label": "Country",
+    "create_account": "Create Account",
+    "creating": "Please wait! Your account is being created.",
+    "success": "Success! Your account has been created.",
+    "error": "An unexpected error occurred. Please try again later.",
     "TOS": "Terms of Service",
     "accept": "I accept Music's {0}"
   },
+  "upload": {
+    "title": "Upload",
+    "drop_files": "Drop your files here",
+    "or_click": "or click to browse"
+  },
   "song": {
-    "comment_count": "No comments | 1 Comment | {count} Comments"
+    "comment_count": "No comments | 1 Comment | {count} Comments",
+    "comment_placeholder": "Your comment here...",
+    "submit": "Submit",
+    "sort_latest": "Latest",
+    "sort_oldest": "Oldest",
+    "commenting": "Please wait! Your comment is being submitted",
+    "comment_success": "Comment added!"
+  },
+  "composition": {
+    "song_title_label": "Song Title",
+    "song_title_placeholder": "Enter Song Title",
+    "genre_label": "Genre",
+    "genre_placeholder": "Enter Genre",
+    "cancel": "Cancel",
+    "save_changes": "Save Changes",
+    "updating": "Please wait! Updating song info.",
+    "update_success": "Success!",
+    "update_error": "Something went wrong! Try again later"
+  },
+  "playlist": {
+    "your_playlists": "Your Playlists",
+    "create": "Create Playlist",
+    "edit": "Edit Playlist",
+    "delete": "Delete Playlist",
+    "add_song": "Add to Playlist",
+    "remove_song": "Remove from Playlist",
+    "empty": "This playlist is empty",
+    "empty_desc": "Add songs from the home page to get started.",
+    "no_playlists": "You haven't created any playlists yet",
+    "no_playlists_desc": "It's easy! Just tap the button below and start adding your favorite songs.",
+    "create_first": "Create your first playlist",
+    "song_count": "No songs | 1 song | {count} songs",
+    "play_all": "Play All",
+    "library": "Library",
+    "label_playlist": "Playlist",
+    "loading": "Loading...",
+    "name_label": "Playlist Name",
+    "name_placeholder": "My Awesome Playlist",
+    "desc_label": "Description",
+    "desc_optional": "optional",
+    "desc_placeholder": "Add an optional description...",
+    "cover_color": "Cover Color",
+    "create_new": "Create new playlist",
+    "add_to_playlist": "Add to Playlist",
+    "song_added": "Song added!",
+    "already_in_playlist": "Song is already in this playlist.",
+    "add_failed": "Failed to add song. Try again."
+  },
+  "about": {
+    "heading": "Meet Vibe.",
+    "subtitle": "The most beautiful way to manage, organize, and listen to your personal music collection.",
+    "p1": "Vibe is an open-source, modern music player built from the ground up for performance and aesthetic purity. Powered by Vue 3, Vite, and Appwrite, it offers a seamless and highly responsive audio experience.",
+    "p2": "Whether you are uploading a vast library of genres or casually streaming a few favorites, Vibe's custom-built audio engine guarantees gapless transitions, intelligent network caching, and perfect sync across your devices.",
+    "p3": "Design is at the core of everything we do. We stripped away the bulky complexity of traditional media managers to leave behind exactly what matters: your music.",
+    "start_listening": "Start Listening"
+  },
+  "confirm": {
+    "cancel": "Cancel",
+    "logout_title": "Confirm Logout",
+    "logout_message": "Are you sure you want to log out of your account?",
+    "logout_btn": "Logout"
   }
 }

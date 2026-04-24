@@ -14,7 +14,7 @@
         <div class="px-6 py-6 sm:p-8">
           <!--Title-->
           <div class="flex justify-between items-center pb-6">
-            <h3 class="text-2xl font-bold text-gray-900 dark:text-white tracking-tight">Welcome</h3>
+            <h3 class="text-2xl font-bold text-gray-900 dark:text-white tracking-tight">{{ $t('auth.welcome') }}</h3>
             <!-- Modal Close Button -->
             <button class="w-8 h-8 flex items-center justify-center rounded-full bg-gray-100 dark:bg-gray-700 text-gray-500 dark:text-gray-400 hover:bg-gray-200 dark:hover:bg-gray-600 hover:text-gray-800 dark:hover:text-white transition-colors focus:outline-none" 
               @click.prevent="toggleAuthModal">
@@ -27,12 +27,12 @@
             <button class="flex-1 py-2 text-sm font-medium rounded-lg transition-all duration-200 focus:outline-none"
               @click.prevent="tab = 'login'"
               :class="tab === 'login' ? 'bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 shadow-sm' : 'text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200 hover:bg-gray-200/50 dark:hover:bg-gray-600/50'">
-              Login
+              {{ $t('auth.login_tab') }}
             </button>
             <button class="flex-1 py-2 text-sm font-medium rounded-lg transition-all duration-200 focus:outline-none"
               @click.prevent="tab = 'register'"
               :class="tab === 'register' ? 'bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 shadow-sm' : 'text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200 hover:bg-gray-200/50 dark:hover:bg-gray-600/50'">
-              Register
+              {{ $t('auth.register_tab') }}
             </button>
           </div>
 
