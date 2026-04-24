@@ -19,9 +19,12 @@ import AppHeader from '@/components/Header.vue';
 import AuthModal from '@/components/Auth.vue';
 import { useAuthStore } from '@/stores/auth';
 import { usePlayerStore } from '@/stores/player';
+import { useKeyboardShortcuts } from '@/composables/useKeyboardShortcuts';
 
 const authStore = useAuthStore();
 const playerStore = usePlayerStore();
+
+useKeyboardShortcuts();
 
 onMounted(() => {
   authStore.init_login();

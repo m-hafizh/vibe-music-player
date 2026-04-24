@@ -27,10 +27,21 @@
     <!-- Main Content -->
     <section class="container mx-auto">
       <div class="bg-white rounded border border-gray-200 relative flex flex-col">
-        <div class="px-6 pt-6 pb-5 font-bold border-b border-gray-200"
-          v-icon-secondary="{ icon: 'headphones-alt', right: true }">
-          <span class="card-title">Songs</span>
-          <!-- Icon -->
+        <div class="px-6 pt-6 pb-5 border-b border-gray-200 flex items-center justify-between bg-white z-20">
+          <div class="font-bold text-xl" v-icon-secondary="{ icon: 'headphones-alt', right: true }">
+            <span class="card-title mr-3">Songs</span>
+          </div>
+          
+          <!-- Search UI -->
+          <div class="relative w-full max-w-sm ml-4 text-black font-normal flex-shrink-0">
+            <i class="fa fa-search absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400"></i>
+            <input type="text" v-model="searchQuery"
+              class="w-full py-2 pl-11 pr-10 border border-gray-300 rounded-full focus:outline-none focus:border-green-500 focus:ring-1 focus:ring-green-500 transition text-sm"
+              placeholder="Search songs by title..." />
+            <button v-show="searchQuery" @click.prevent="searchQuery = ''" class="absolute right-4 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-gray-600 focus:outline-none transition-colors">
+              <i class="fa fa-times"></i>
+            </button>
+          </div>
         </div>
         <!-- Playlist -->
         <ol id="playlist">
@@ -44,17 +55,37 @@
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted, onUnmounted } from 'vue';
+import { ref, onMounted, onUnmounted, watch } from 'vue';
+import { useRoute, useRouter } from 'vue-router';
 import { databases, databaseId, songsCollectionId } from '@/includes/appwrite';
 import { Query } from 'appwrite';
 import AppSongItem from '@/components/SongItem.vue';
 import IconSecondary from '@/directives/icon-secondary';
+import { usePlayerStore } from '@/stores/player';
 
 const vIconSecondary = IconSecondary;
+const playerStore = usePlayerStore();
+const route = useRoute();
+const router = useRouter();
 
 const songs = ref<any[]>([]);
 const maxPerPage = 25;
 const pendingRequest = ref(false);
+
+const searchQuery = ref((route.query.q as string) || '');
+let searchTimeout: ReturnType<typeof setTimeout> | null = null;
+
+watch(searchQuery, (newVal) => {
+  // Sync to URL
+  router.replace({ query: { ...route.query, q: newVal || undefined } });
+  
+  if (searchTimeout) clearTimeout(searchTimeout);
+  searchTimeout = setTimeout(() => {
+    songs.value = [];
+    pendingRequest.value = false; // Reset lock to allow fresh query
+    getSongs();
+  }, 300);
+});
 
 onMounted(() => {
   getSongs();
@@ -87,6 +118,11 @@ async function getSongs() {
     Query.limit(maxPerPage),
   ];
 
+  // Apply search filter if query text exists
+  if (searchQuery.value) {
+    queries.push(Query.startsWith('modified_name', searchQuery.value));
+  }
+
   if (songs.value.length) {
     queries.push(Query.cursorAfter(songs.value[songs.value.length - 1].docID));
   }
@@ -104,6 +140,9 @@ async function getSongs() {
         ...document,
       });
     });
+
+    // Update the player playlist with all loaded songs
+    playerStore.setPlaylist(songs.value);
   } catch (error) {
     // console.log(error);
   }
